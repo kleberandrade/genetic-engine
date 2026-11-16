@@ -45,7 +45,9 @@ only implementation details or an incidental random sequence.
 
 Maintain semantic versions. Before 1.0, an incompatible public API change advances
 the minor version. Update pubspec and changelog together, run all checks, create
-an annotated `vX.Y.Z` Git tag, and push it. A source tag does not imply a pub.dev
+an annotated `vX.Y.Z` Git tag, and push it. Version tags run validation and then create a GitHub release
+from `doc/releases/X.Y.Z.md`; include that notes file before tagging.
+A source tag does not imply a pub.dev
 publication. Hosted publication is a separate maintainer action after validation.
 
 The local `crapper`, `dryer` and `mutator` tools do not currently support Dart.

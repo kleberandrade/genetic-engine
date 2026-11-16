@@ -42,3 +42,12 @@ reported according to their observed outcomes.
 - Created an isolated writable dependency cache and resolved dependencies offline.
   Publishing validation still requires network access; the shell cannot resolve
   pub.dev. No validation has been bypassed and no publication is claimed.
+
+- The corrected revision passed remote CI on both Dart 3.3.0 and stable,
+  including publication dry-run (GitHub Actions run 43886405450).
+- The local dry-run assembled the archive successfully, then failed with a
+  socket error when contacting pub.dev; the publication upload remains blocked.
+- Added a tag-triggered, validation-gated GitHub release job using the built-in
+  short-lived repository token. No personal credential is copied to CI.
+- Prepared source release notes that explicitly distinguish GitHub distribution
+  from the pending hosted pub.dev publication.
