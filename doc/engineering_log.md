@@ -30,3 +30,15 @@ No repository-backed source is duplicated into an artifact store. No unrelated
 worktree or user cache was deleted. Source version tags are distinct from hosted
 package releases. GitHub push, tag synchronization and topic changes should be
 reported according to their observed outcomes.
+
+## 2026-11-16 — Publication preparation
+
+- Renamed the documentation directory to `doc/` at the maintainer's request;
+  updated README and repository instructions to use the new paths.
+- Prepared source version 0.2.1 to preserve the existing public 0.2.0 tag.
+- Confirmed the package page returns 404 before publication and identified the
+  account's existing `kleberandrade.dev` publisher.
+- Inspected remote CI: the previous revision failed at publication dry-run.
+- Created an isolated writable dependency cache and resolved dependencies offline.
+  Publishing validation still requires network access; the shell cannot resolve
+  pub.dev. No validation has been bypassed and no publication is claimed.

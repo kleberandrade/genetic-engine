@@ -12,10 +12,10 @@ HTTP, execution workers and fuzzy logic outside its core.
   type checks, registries, or inheritance from the engine.
 - Model genomes as immutable values. Never mutate parents or share run state.
 - Validate configuration at construction and fitness at the callback boundary.
-- Follow the source map and dependency rules in `docs/architecture.md`.
+- Follow the source map and dependency rules in `doc/architecture.md`.
 - Use `lib/genetic_engine.dart` in tests and examples rather than internal paths.
 - Run the checks in CONTRIBUTING.md, and keep docs and changelog synchronized.
-- Keep a concise action/reason/validation log in `docs/engineering_log.md`.
+- Keep a concise action/reason/validation log in `doc/engineering_log.md`.
 - Commit in focused, ordered units; push the completed work to the main line.
 
 ## Quality tools

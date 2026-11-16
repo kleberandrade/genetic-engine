@@ -5,6 +5,12 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+## 0.2.1 — 2026-11-16
+
+- Move documentation from `docs/` to the conventional `doc/` directory.
+- Update documentation links and contributor instructions.
+- Preserve the already published v0.2.0 source tag.
+
 ## 0.2.0 — 2026-11-16
 
 ### Breaking changes

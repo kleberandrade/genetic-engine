@@ -9,7 +9,7 @@ A **pure Dart genetic algorithm framework** for Flutter apps and Dart APIs.
 Compose typed strategies for your problem without modifying the evolution loop.
 No runtime dependencies, Flutter imports, or connection to a fuzzy engine.
 
-**Status:** pre-release 0.2.0. GitHub source is available; pub.dev publication is
+**Status:** pre-release 0.2.1. GitHub source is available; pub.dev publication is
 pending. Badges describe CI, SDK requirements, license and tags; there is no
 claim of pub.dev availability or a package score before publication.
 
@@ -20,7 +20,7 @@ dependencies:
   genetic_engine:
     git:
       url: https://github.com/kleberandrade/genetic-engine.git
-      ref: v0.2.0
+      ref: v0.2.1
 ```
 
 For local development, use `path: ../genetic_engine` instead. After publication,
@@ -76,13 +76,13 @@ All five extension points are interfaces: `GenomeFactory`, `FitnessEvaluator`,
 
 ## Learn and contribute
 
-- [Getting started, terminology and parameter guide](docs/getting_started.md)
-- [Architecture and dependency rules](docs/architecture.md)
-- [Custom operators and problem constraints](docs/extending.md)
-- [Flutter and Dart service integration](docs/integration.md)
-- [Migration from pre-release 0.1](docs/migration.md)
+- [Getting started, terminology and parameter guide](doc/getting_started.md)
+- [Architecture and dependency rules](doc/architecture.md)
+- [Custom operators and problem constraints](doc/extending.md)
+- [Flutter and Dart service integration](doc/integration.md)
+- [Migration from pre-release 0.1](doc/migration.md)
 - [Contributing](CONTRIBUTING.md), [changelog](CHANGELOG.md)
-- [Engineering log and verification limits](docs/engineering_log.md)
+- [Engineering log and verification limits](doc/engineering_log.md)
 
 Executable examples: [binary search](example/genetic_engine_example.dart),
 [numerical minimization](example/minimize.dart), and
