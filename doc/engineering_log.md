@@ -122,3 +122,8 @@ applied. No credential was extracted, copied into source, or sent to CI.
   all 90 benchmark targets. Artifact upload skipped the hidden report directory;
   explicitly enabled hidden-file upload for that scoped directory and made a
   missing artifact a failure so raw evidence cannot silently disappear.
+- The first Flutter consumer resolved hosted 0.3.1 successfully, then its
+  fatal-info analysis rejected deprecated flutter/material.dart in the harness
+  on the current stable SDK. Replaced the unnecessary Material wrapper with
+  core WidgetsApp/widgets.dart; kept fatal-info validation enabled and did not
+  suppress the diagnostic or change the genetic engine.

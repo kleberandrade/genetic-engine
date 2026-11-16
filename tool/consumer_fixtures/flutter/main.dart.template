@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:genetic_engine/genetic_engine.dart';
 
 double solve(int seed) => GeneticAlgorithm<List<bool>>(
@@ -17,12 +17,13 @@ class ConsumerApp extends StatelessWidget {
   const ConsumerApp({super.key, this.result});
   final Future<double>? result;
   @override
-  Widget build(BuildContext context) => MaterialApp(
-    home: Scaffold(body: FutureBuilder<double>(
+  Widget build(BuildContext context) => WidgetsApp(
+    color: const Color(0xFF212121),
+    builder: (context, child) => FutureBuilder<double>(
       future: result ?? compute(solve, 42),
       builder: (context, snapshot) => Center(child: Text(
         snapshot.hasData ? 'Fitness: ${snapshot.data!.toInt()}' : 'Optimizing',
       )),
-    )),
+    ),
   );
 }
