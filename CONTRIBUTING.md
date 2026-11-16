@@ -24,7 +24,7 @@ questions and proposals, and pull requests for focused changes.
 ## Required checks
 
 ```sh
-dart format --output=none --set-exit-if-changed lib test example
+dart format --output=none --set-exit-if-changed lib test example tool
 dart analyze --fatal-infos
 dart test
 dart run example/genetic_engine_example.dart

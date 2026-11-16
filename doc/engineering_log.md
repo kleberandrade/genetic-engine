@@ -127,3 +127,13 @@ applied. No credential was extracted, copied into source, or sent to CI.
   on the current stable SDK. Replaced the unnecessary Material wrapper with
   core WidgetsApp/widgets.dart; kept fatal-info validation enabled and did not
   suppress the diagnostic or change the genetic engine.
+
+- Confirmed successful consumer workflow run 43900206559 (commit 897fd20):
+  hosted Dart checks and benchmark passed in 16 seconds; hosted Flutter analysis,
+  compute/widget tests and release web compilation passed in 1 minute 20 seconds.
+  Both evidence artifacts are present. All 90 hosted benchmark targets were met.
+- Recorded the successful run and exact scope in doc/validation.md, added dynamic
+  consumer/points badges, and retained source-library equivalence to v0.3.1.
+- Browser artifact download was interrupted by a lost in-app route; no local
+  copy of the CI artifact is claimed. The artifact files remain available in the
+  verified GitHub run, alongside the separately committed local baseline.

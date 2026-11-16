@@ -3,6 +3,8 @@
 [![pub package](https://img.shields.io/pub/v/genetic_engine.svg)](https://pub.dev/packages/genetic_engine)
 [![API reference](https://img.shields.io/badge/API-reference-blue.svg)](https://pub.dev/documentation/genetic_engine/latest/)
 [![Dart CI](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml)
+[![Published consumers](https://github.com/kleberandrade/genetic-engine/actions/workflows/consumers.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/consumers.yml)
+[![pub points](https://img.shields.io/pub/points/genetic_engine)](https://pub.dev/packages/genetic_engine/score)
 [![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.3.0-blue?logo=dart)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Latest tag](https://img.shields.io/github/v/tag/kleberandrade/genetic-engine)](https://github.com/kleberandrade/genetic-engine/tags)
@@ -109,7 +111,7 @@ Executable examples: [binary search](example/genetic_engine_example.dart),
 
 ```sh
 dart pub get
-dart format --output=none --set-exit-if-changed lib test example
+dart format --output=none --set-exit-if-changed lib test example tool
 dart analyze --fatal-infos
 dart test
 dart run example/genetic_engine_example.dart

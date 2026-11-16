@@ -35,9 +35,20 @@ are retained. `GENETIC_ENGINE_VERSION` accepts an exact stable version. CI pins 
 to 0.3.1 deliberately; testing the published version and testing the working tree
 serve different purposes.
 
-The `Published package consumers` workflow runs both jobs. Its success and summary
-are the evidence of actual hosted installation, distinct from the local baseline.
-Do not mark these checks as passed until their jobs have completed successfully.
+The `Published package consumers` workflow runs both jobs. Both passed on
+2026-11-16 in [run 43900206559](https://github.com/kleberandrade/genetic-engine/actions/runs/43900206559)
+for source commit `897fd20`:
+
+- Hosted Dart consumer and benchmark: **passed** (16 seconds).
+- Hosted Flutter consumer, compute/widget checks and release web build:
+  **passed** (1 minute 20 seconds).
+- Both scoped evidence artifacts were uploaded successfully, retaining the
+  resolved lockfiles and the Dart benchmark's per-seed JSON and Markdown report.
+
+This is evidence of actual hosted installation, distinct from the local baseline.
+CI benchmarks also reached all 90 configured targets. The hosted Dart run used
+Dart 3.14.0 on Linux; the local report uses Dart 3.11.5 on macOS. Do not compare
+their timings as a controlled hardware or runtime experiment.
 
 ## Performance and convergence baseline
 
