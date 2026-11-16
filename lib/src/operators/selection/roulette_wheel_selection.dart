@@ -1,6 +1,7 @@
 import 'dart:math';
 import '../../contracts/selection.dart';
 import '../../domain/candidate.dart';
+import 'selection_weights.dart';
 
 /// Fitness-proportionate selection with explicit nonnegative weights.
 /// Supply a suitable transformation for negative fitness or minimization.
@@ -11,20 +12,16 @@ final class RouletteWheelSelection<T> implements Selection<T> {
   const RouletteWheelSelection({required this.weight});
   @override
   T select(List<Candidate<T>> ranked, Random random) {
-    if (ranked.isEmpty) throw ArgumentError('Population cannot be empty');
-    final weights = ranked.map(weight).toList();
-    if (weights.any((w) => !w.isFinite || w < 0)) {
-      throw ArgumentError('Weights must be finite and nonnegative');
+    final normalized = selectionWeights(ranked, weight);
+    if (normalized.every((w) => w == 0)) {
+      return ranked[random.nextInt(ranked.length)].genome;
     }
-    final scale = weights.reduce(max);
-    if (scale == 0) return ranked[random.nextInt(ranked.length)].genome;
-    final normalized = weights.map((w) => w / scale).toList();
     var pointer = random.nextDouble() * normalized.reduce((a, b) => a + b);
     for (var i = 0; i < normalized.length; i++) {
       pointer -= normalized[i];
       if (pointer < 0) return ranked[i].genome;
     }
     // Rounding can leave the pointer at a tiny positive value.
-    return ranked[weights.lastIndexWhere((w) => w > 0)].genome;
+    return ranked[normalized.lastIndexWhere((w) => w > 0)].genome;
   }
 }

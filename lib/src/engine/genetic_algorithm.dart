@@ -1,3 +1,4 @@
+import '../contracts/batch_selection.dart';
 import '../contracts/elitism.dart';
 import '../contracts/termination.dart';
 import '../domain/evolution_state.dart';
@@ -25,7 +26,10 @@ final class GeneticAlgorithm<T> {
   final FitnessEvaluator<T> evaluator;
   final Crossover<T> crossover;
   final Mutation<T> mutation;
-  final Selection<T> selection;
+
+  /// Supply exactly one of [selection] and [batchSelection].
+  final Selection<T>? selection;
+  final BatchSelection<T>? batchSelection;
   final Objective objective;
   final int populationSize;
   final int maxGenerations;
@@ -47,7 +51,8 @@ final class GeneticAlgorithm<T> {
     required this.evaluator,
     required this.crossover,
     required this.mutation,
-    required this.selection,
+    this.selection,
+    this.batchSelection,
     this.objective = Objective.maximize,
     this.populationSize = 100,
     this.maxGenerations = 100,
@@ -60,6 +65,9 @@ final class GeneticAlgorithm<T> {
     this.targetFitness,
     this.seed,
   }) {
+    if ((selection == null) == (batchSelection == null)) {
+      throw ArgumentError('Supply exactly one of selection and batchSelection');
+    }
     if (populationSize < 2) throw ArgumentError('populationSize must be >= 2');
     if (maxGenerations < 0) throw ArgumentError('maxGenerations must be >= 0');
     _eliteCount = elitePolicy?.survivorCount(populationSize) ?? elitism;
@@ -129,10 +137,10 @@ final class GeneticAlgorithm<T> {
     return Generation(index, population);
   }
 
-  T _reproduce(List<Candidate<T>> ranked, Random random) {
-    var child = selection.select(ranked, random);
+  T _reproduce(T Function() nextParent, Random random) {
+    var child = nextParent();
     if (random.nextDouble() < crossoverRate) {
-      child = crossover.cross(child, selection.select(ranked, random), random);
+      child = crossover.cross(child, nextParent(), random);
     }
     if (random.nextDouble() < mutationRate) {
       child = mutation.mutate(child, random);
@@ -142,8 +150,24 @@ final class GeneticAlgorithm<T> {
 
   Generation<T> _advance(Generation<T> current, Random random) {
     final next = current.population.take(_eliteCount).toList();
-    while (next.length < populationSize) {
-      next.add(_evaluate(_reproduce(current.population, random)));
+    final batch = batchSelection;
+    if (batch == null) {
+      // Preserve the existing on-demand selection and random-call sequence.
+      while (next.length < populationSize) {
+        next.add(_evaluate(_reproduce(
+            () => selection!.select(current.population, random), random)));
+      }
+    } else {
+      final count = 2 * (populationSize - _eliteCount);
+      final selected = batch.selectMany(current.population, count, random);
+      if (selected.length != count) {
+        throw StateError('BatchSelection must return exactly $count parents');
+      }
+      final parents = selected.toList()..shuffle(random);
+      for (var i = 0; next.length < populationSize; i += 2) {
+        var cursor = i;
+        next.add(_evaluate(_reproduce(() => parents[cursor++], random)));
+      }
     }
     return _rank(current.index + 1, next);
   }

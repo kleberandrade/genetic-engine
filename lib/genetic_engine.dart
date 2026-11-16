@@ -46,3 +46,6 @@ export 'src/termination/generation_limit.dart';
 export 'src/termination/or_termination.dart';
 export 'src/termination/stagnation_limit.dart';
 export 'src/termination/time_limit.dart';
+
+export 'src/contracts/batch_selection.dart';
+export 'src/operators/selection/stochastic_universal_sampling_selection.dart';
