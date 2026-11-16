@@ -37,8 +37,21 @@ serve different purposes.
 
 The workflow now exercises published SUS in addition to the existing tournament,
 minimization and permutation checks. It also generates the selector comparison
-inside the fresh hosted Dart project. Completion evidence for this updated pin
-must come from a successful GitHub run; source-only checks do not establish it.
+inside the fresh hosted Dart project. Both updated jobs passed on 2026-11-16 in
+[run 43910958812](https://github.com/kleberandrade/genetic-engine/actions/runs/43910958812)
+for commit `c3c5f4b`:
+
+- Hosted Dart 0.4.0 resolution, tournament/SUS, native isolates and both benchmarks:
+  passed in 21 seconds.
+- Hosted Flutter 0.4.0 analysis, tournament/SUS compute, widget rendering and
+  release web compilation: passed in 1 minute 1 second.
+- Both evidence artifacts are present, retaining exact-version hosted lockfiles
+  and the Dart reports. The 180-target success claim below refers to the committed
+  local comparison; no unread CI per-seed values are substituted for it.
+
+[Source CI run 43910958932](https://github.com/kleberandrade/genetic-engine/actions/runs/43910958932)
+also passed on Dart 3.3.0 and stable, including 53 tests, analysis, all nine
+examples and publication dry-run. Source and hosted checks serve different roles.
 
 ### Historical consumer evidence (0.3.1)
 

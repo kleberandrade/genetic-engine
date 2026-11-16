@@ -197,3 +197,10 @@ applied. No credential was extracted, copied into source, or sent to CI.
   unsupported for Dart; no metric or mutation score is fabricated.
 - No library change, version bump or retagging: new examples/docs are on main,
   while the immutable published 0.4.0 archive and tag remain intact.
+
+- Verified networked CI for commit c3c5f4b: source run 43910958932 passed on
+  Dart 3.3.0/stable; hosted consumer run 43910958812 passed Dart in 21 seconds
+  and Flutter in 1 minute 1 second, with both evidence artifacts present.
+  This establishes actual hosted 0.4.0 resolution and SUS execution, independent
+  of the source-only fixture check. CI raw benchmark values were not downloaded
+  or claimed as inspected; local per-seed results remain separately labeled.
