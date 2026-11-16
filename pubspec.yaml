@@ -1,0 +1,13 @@
+name: genetic_engine
+description: A pure Dart genetic algorithm framework with extensible genomes, selection, crossover and mutation for Flutter apps and Dart services.
+version: 0.1.0
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dev_dependencies:
+  test: ^1.25.0
+repository: https://github.com/kleberandrade/genetic-engine
+issue_tracker: https://github.com/kleberandrade/genetic-engine/issues
+topics:
+  - genetic-algorithm
+  - optimization
+  - evolutionary-algorithms
