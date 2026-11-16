@@ -6,8 +6,9 @@ final class OrTermination implements Termination {
   final List<Termination> conditions;
   OrTermination(Iterable<Termination> conditions)
       : conditions = List.unmodifiable(conditions) {
-    if (this.conditions.isEmpty)
+    if (this.conditions.isEmpty) {
       throw ArgumentError('At least one condition is required');
+    }
   }
   @override
   bool isMet(EvolutionState state) =>

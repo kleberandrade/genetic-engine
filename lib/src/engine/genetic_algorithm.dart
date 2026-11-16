@@ -134,8 +134,9 @@ final class GeneticAlgorithm<T> {
     if (random.nextDouble() < crossoverRate) {
       child = crossover.cross(child, selection.select(ranked, random), random);
     }
-    if (random.nextDouble() < mutationRate)
+    if (random.nextDouble() < mutationRate) {
       child = mutation.mutate(child, random);
+    }
     return child;
   }
 

@@ -5,6 +5,15 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+## 0.3.1 — 2026-11-16
+
+- Add braces to the mutation branch and empty AND/OR termination guards,
+  resolving the three lints reported by pub.dev for version 0.3.0.
+- Enforce `curly_braces_in_flow_control_structures` in local analysis and CI.
+- Include the hosted-installation README and package/API badges in the next
+  published archive.
+- Preserve runtime behavior, public APIs and supported SDK constraints.
+
 ## 0.3.0 — 2026-11-16
 
 - Add pluggable fixed/fractional elitism and the effective survivor count.

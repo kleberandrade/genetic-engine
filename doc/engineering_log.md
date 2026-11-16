@@ -86,3 +86,16 @@ applied. No credential was extracted, copied into source, or sent to CI.
   will pick up these text changes with the next package publication.
 - Validation: metadata-only changes; checked relative links and git whitespace.
   Runtime code remains the previously validated 38-test revision.
+
+## 2026-11-16 — Static analysis patch (0.3.1)
+
+- Inspected the published 0.3.0 score: 150/160, with 40/50 in static analysis.
+- Added the analyzer rule before changing code; reproduced exactly three
+  missing-block diagnostics in GeneticAlgorithm, AndTermination and OrTermination.
+- Added explicit blocks to those branches without changing their behavior.
+- Kept the lint in analysis_options.yaml; existing `dart analyze --fatal-infos`
+  CI now rejects this regression without another dependency.
+- Prepared patch source version 0.3.1 and included the corrected installation
+  README in the new archive. The hosted 0.3.0 archive remains unchanged.
+- The pub.dev score must be confirmed after uploading and analyzing the patch;
+  fixing source alone does not change the old published version's score.
