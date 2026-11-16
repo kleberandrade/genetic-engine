@@ -1,94 +1,104 @@
 # genetic_engine
 
-A dependency-free genetic algorithm framework for Dart services and Flutter apps.
-Independent of fuzzy logic, machine learning libraries, and Flutter itself.
+[![Dart CI](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml)
+[![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.3.0-blue?logo=dart)](https://dart.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Latest tag](https://img.shields.io/github/v/tag/kleberandrade/genetic-engine)](https://github.com/kleberandrade/genetic-engine/tags)
 
-## Quick start
+A **pure Dart genetic algorithm framework** for Flutter apps and Dart APIs.
+Compose typed strategies for your problem without modifying the evolution loop.
+No runtime dependencies, Flutter imports, or connection to a fuzzy engine.
+
+**Status:** pre-release 0.2.0. GitHub source is available; pub.dev publication is
+pending. Badges describe CI, SDK requirements, license and tags; there is no
+claim of pub.dev availability or a package score before publication.
+
+## Install from source
+
+```yaml
+dependencies:
+  genetic_engine:
+    git:
+      url: https://github.com/kleberandrade/genetic-engine.git
+      ref: v0.2.0
+```
+
+For local development, use `path: ../genetic_engine` instead. After publication,
+this dependency can be replaced with the corresponding hosted version.
+
+## Your first optimization
+
+A genetic algorithm creates candidate solutions, evaluates them, selects parents,
+and generates new candidates using crossover and mutation. It repeats this
+process until a stopping condition holds. Higher fitness is better by default.
+
+This example asks for 32 binary genes all equal to `true`:
 
 ```dart
 import 'package:genetic_engine/genetic_engine.dart';
 
 void main() {
-  final result = GeneticAlgorithm<List<bool>>(
-    create: (r) => List.unmodifiable(List.generate(32, (_) => r.nextBool())),
-    fitness: (g) => g.where((bit) => bit).length.toDouble(),
-    select: tournamentSelection(),
-    crossover: singlePointCrossover,
-    mutate: bitFlipMutation,
+  final engine = GeneticAlgorithm<List<bool>>(
+    factory: CallbackGenomeFactory((r) =>
+        List.unmodifiable(List.generate(32, (_) => r.nextBool()))),
+    evaluator: CallbackFitnessEvaluator(
+        (g) => g.where((bit) => bit).length.toDouble()),
+    selection: TournamentSelection(),
+    crossover: SinglePointCrossover(),
+    mutation: const BitFlipMutation(),
     mutationRate: 0.3,
-    targetFitness: 32,
     maxGenerations: 200,
+    targetFitness: 32,
     seed: 42,
-  ).run();
+  );
+  final result = engine.run();
   print(result.best.fitness);
 }
 ```
 
-Until published, add a local path dependency pointing to this directory.
+Use `Objective.minimize` to optimize costs or distances. A genetic algorithm is a
+stochastic heuristic: it does not guarantee the global optimum.
 
-## Framework contract
-
-The generic type `T` represents a genome. Supply `create`, `fitness`, `select`,
-`crossover`, and `mutate` callbacks. Custom classes and integer genomes work
-without subclassing. Fitness is synchronous and must return a finite double;
-negative values are supported. Exceptions propagate unchanged.
-
-Genomes must be immutable, and operators must return new genomes rather than
-mutate parents. Built-in operators return unmodifiable lists. Custom objects
-remain the caller's responsibility, including nested mutable fields.
-
-Tournament selection samples population indices with replacement. Populations
-are sorted best first for either objective. A child starts from a selected
-parent; crossover and mutation are applied independently at their configured
-probabilities. Mutation rate is per child, not per gene. One child is produced
-per reproduction event. Elites survive without mutation or re-evaluation.
-Use deterministic fitness when relying on elitism.
+## Choose strategies
 
 | Representation | Crossover | Mutation |
 | --- | --- | --- |
-| Binary lists | Single point, uniform | Bit flip |
-| Integer lists | Single point, uniform | Custom callback |
-| Real lists | Single point, uniform | Bounded random reset |
-| Permutations | Order | Swap |
-| Custom objects | Custom callback | Custom callback |
+| Binary list | `SinglePointCrossover`, `UniformCrossover` | `BitFlipMutation` |
+| Integer list | `SinglePointCrossover`, `UniformCrossover` | Your `Mutation<List<int>>` |
+| Real list | `SinglePointCrossover`, `UniformCrossover` | `RealResetMutation` |
+| Permutation | `OrderCrossover` | `SwapMutation` |
+| Custom immutable object | Your `Crossover<T>` | Your `Mutation<T>` |
 
-Use `Objective.minimize` for costs and distances. Invalid solutions can receive
-a finite penalty; constraints, feasibility checks, and repair belong in your
-callbacks. No built-in constraint solver or multi-objective optimizer is included.
+`TournamentSelection<T>` supports either objective, including negative fitness.
+All five extension points are interfaces: `GenomeFactory`, `FitnessEvaluator`,
+`Selection`, `Crossover`, and `Mutation`. Functions can be wrapped using the
+`Callback...` adapters or passed to `GeneticAlgorithm.withCallbacks`.
 
-## Execution and stopping
+## Learn and contribute
 
-`maxGenerations` counts breeding steps; generation zero is always evaluated.
-`onGeneration` receives a ranked, unmodifiable population after each evaluation.
-`best` in the final result is the best ever observed, even with elitism disabled.
+- [Getting started, terminology and parameter guide](docs/getting_started.md)
+- [Architecture and dependency rules](docs/architecture.md)
+- [Custom operators and problem constraints](docs/extending.md)
+- [Flutter and Dart service integration](docs/integration.md)
+- [Migration from pre-release 0.1](docs/migration.md)
+- [Contributing](CONTRIBUTING.md), [changelog](CHANGELOG.md)
+- [Engineering log and verification limits](docs/engineering_log.md)
 
-Stopping precedence is target fitness, cancellation, stagnation, then generation
-limit. Stagnation counts consecutive generations without strict improvement.
-`shouldStop` is checked between generations, after the progress callback; it
-cannot interrupt an individual evaluation. History is not retained automatically.
-A fixed seed repeats the run for deterministic callbacks using only the provided
-random source within the same Dart runtime. Cross-runtime sequences are not promised.
+Executable examples: [binary search](example/genetic_engine_example.dart),
+[numerical minimization](example/minimize.dart), and
+[custom integer mutation](example/custom_mutation.dart).
 
-## Flutter and Dart APIs
-
-The core uses no `dart:io` or Flutter imports. Calls run synchronously. For native
-Flutter apps or CPU-heavy Dart services, invoke the entire run in `Isolate.run`
-and return the result. Captured values and results must be isolate-sendable.
-For live progress or external cancellation across isolates, wire a worker with
-ports; this package does not provide an isolate executor. Flutter web requires
-a web worker or another application-level scheduling strategy for heavy work.
-
-Genetic algorithms are stochastic heuristics: they do not guarantee a global
-optimum. Start with the supplied defaults and measure results on your problem.
-
-## Examples and validation
+## Development
 
 ```sh
 dart pub get
-dart analyze
+dart format --output=none --set-exit-if-changed lib test example
+dart analyze --fatal-infos
 dart test
 dart run example/genetic_engine_example.dart
 dart run example/minimize.dart
+dart run example/custom_mutation.dart
+dart pub publish --dry-run
 ```
 
-MIT licensed. Initial version; package name availability and publication pending.
+MIT © 2026 Kleber Andrade.
