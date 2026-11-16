@@ -1,3 +1,6 @@
+import '../contracts/elitism.dart';
+import '../contracts/termination.dart';
+import '../domain/evolution_state.dart';
 import 'dart:math';
 import '../contracts/genome_factory.dart';
 import '../adapters/callback_genome_factory.dart';
@@ -27,6 +30,12 @@ final class GeneticAlgorithm<T> {
   final int populationSize;
   final int maxGenerations;
   final int elitism;
+  final Elitism? elitePolicy;
+  final Termination? termination;
+  late final int _eliteCount;
+
+  /// Effective unchanged survivor count; an explicit policy overrides elitism.
+  int get effectiveElitism => _eliteCount;
   final int? stagnationLimit;
   final double crossoverRate;
   final double mutationRate;
@@ -43,6 +52,8 @@ final class GeneticAlgorithm<T> {
     this.populationSize = 100,
     this.maxGenerations = 100,
     this.elitism = 1,
+    this.elitePolicy,
+    this.termination,
     this.stagnationLimit,
     this.crossoverRate = 0.8,
     this.mutationRate = 0.1,
@@ -51,7 +62,8 @@ final class GeneticAlgorithm<T> {
   }) {
     if (populationSize < 2) throw ArgumentError('populationSize must be >= 2');
     if (maxGenerations < 0) throw ArgumentError('maxGenerations must be >= 0');
-    if (elitism < 0 || elitism >= populationSize) {
+    _eliteCount = elitePolicy?.survivorCount(populationSize) ?? elitism;
+    if (_eliteCount < 0 || _eliteCount >= populationSize) {
       throw ArgumentError('elitism must be >= 0 and < populationSize');
     }
     if (stagnationLimit != null && stagnationLimit! < 1) {
@@ -78,6 +90,8 @@ final class GeneticAlgorithm<T> {
     int populationSize = 100,
     int maxGenerations = 100,
     int elitism = 1,
+    Elitism? elitePolicy,
+    Termination? termination,
     int? stagnationLimit,
     double crossoverRate = 0.8,
     double mutationRate = 0.1,
@@ -94,6 +108,8 @@ final class GeneticAlgorithm<T> {
           populationSize: populationSize,
           maxGenerations: maxGenerations,
           elitism: elitism,
+          elitePolicy: elitePolicy,
+          termination: termination,
           stagnationLimit: stagnationLimit,
           crossoverRate: crossoverRate,
           mutationRate: mutationRate,
@@ -124,7 +140,7 @@ final class GeneticAlgorithm<T> {
   }
 
   Generation<T> _advance(Generation<T> current, Random random) {
-    final next = current.population.take(elitism).toList();
+    final next = current.population.take(_eliteCount).toList();
     while (next.length < populationSize) {
       next.add(_evaluate(_reproduce(current.population, random)));
     }
@@ -132,7 +148,7 @@ final class GeneticAlgorithm<T> {
   }
 
   StopReason? _stopReason(Generation<T> generation, Candidate<T> best,
-      int stagnant, bool Function()? shouldStop) {
+      int stagnant, Duration elapsed, bool Function()? shouldStop) {
     final target = targetFitness;
     if (target != null && !objective.isBetter(target, best.fitness)) {
       return StopReason.targetFitness;
@@ -140,6 +156,13 @@ final class GeneticAlgorithm<T> {
     if (shouldStop?.call() ?? false) return StopReason.cancelled;
     final limit = stagnationLimit;
     if (limit != null && stagnant >= limit) return StopReason.stagnation;
+    final state = EvolutionState(
+        generation: generation.index,
+        bestFitness: best.fitness,
+        stagnantGenerations: stagnant,
+        objective: objective,
+        elapsed: elapsed);
+    if (termination?.isMet(state) ?? false) return StopReason.customTermination;
     if (generation.index >= maxGenerations) return StopReason.generationLimit;
     return null;
   }
@@ -151,6 +174,7 @@ final class GeneticAlgorithm<T> {
     void Function(Generation<T>)? onGeneration,
     bool Function()? shouldStop,
   }) {
+    final watch = Stopwatch()..start();
     final random = Random(seed);
     var generation = _rank(
         0,
@@ -160,7 +184,8 @@ final class GeneticAlgorithm<T> {
     var stagnant = 0;
     while (true) {
       onGeneration?.call(generation);
-      final reason = _stopReason(generation, best, stagnant, shouldStop);
+      final reason =
+          _stopReason(generation, best, stagnant, watch.elapsed, shouldStop);
       if (reason != null) return EvolutionResult(best, generation, reason);
       generation = _advance(generation, random);
       if (objective.isBetter(generation.best.fitness, best.fitness)) {
