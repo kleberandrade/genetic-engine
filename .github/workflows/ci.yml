@@ -25,6 +25,8 @@ jobs:
       - run: dart run example/eight_queens.dart
       - run: dart run example/password.dart
       - run: dart run example/knapsack.dart
+      - run: dart run example/task_scheduling.dart
+      - run: dart run example/parameter_fitting.dart
       - run: dart pub publish --dry-run
 
   release:
