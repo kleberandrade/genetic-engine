@@ -163,7 +163,8 @@ applied. No credential was extracted, copied into source, or sent to CI.
   40 at weight 10 (also checked against all 64 subsets). These small examples do
   not establish convergence for other seeds or larger problems.
 - Publication dry-run assembled a 47 KB archive and reached package validation,
-  but the local network check did not finish; cancelled it rather than claiming
-  full dry-run success. The networked CI runner must complete this check.
+  but ended with a socket error reaching pub.dev; no full local dry-run success
+  is claimed. Networked Dart CI run 43905166657 passed both Dart 3.3.0 and stable,
+  including the package dry-run, analyzer, tests and all examples.
 - Crapper/dryer/mutator remain unsupported for Dart as recorded above; no empty
   metric report is treated as evidence.
