@@ -1,5 +1,7 @@
 # genetic_engine
 
+[![pub package](https://img.shields.io/pub/v/genetic_engine.svg)](https://pub.dev/packages/genetic_engine)
+[![API reference](https://img.shields.io/badge/API-reference-blue.svg)](https://pub.dev/documentation/genetic_engine/latest/)
 [![Dart CI](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml)
 [![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.3.0-blue?logo=dart)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -9,22 +11,27 @@ A **pure Dart genetic algorithm framework** for Flutter apps and Dart APIs.
 Compose typed strategies for your problem without modifying the evolution loop.
 No runtime dependencies, Flutter imports, or connection to a fuzzy engine.
 
-**Status:** pre-release 0.3.0. GitHub source is available; pub.dev publication is
-pending. Badges describe CI, SDK requirements, license and tags; there is no
-claim of pub.dev availability or a package score before publication.
+Published on [pub.dev](https://pub.dev/packages/genetic_engine) by the verified
+publisher [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).
 
-## Install from source
+## Installation
 
 ```yaml
 dependencies:
-  genetic_engine:
-    git:
-      url: https://github.com/kleberandrade/genetic-engine.git
-      ref: v0.3.0
+  genetic_engine: ^0.3.0
 ```
 
-For local development, use `path: ../genetic_engine` instead. After publication,
-this dependency can be replaced with the corresponding hosted version.
+Or add it from your project directory:
+
+```sh
+dart pub add genetic_engine
+```
+
+For Flutter projects, `flutter pub add genetic_engine` works too. Import
+`package:genetic_engine/genetic_engine.dart` to use the framework.
+
+For source development, use the repository's `v0.3.0` tag or a local
+`path: ../genetic_engine` dependency.
 
 ## Your first optimization
 

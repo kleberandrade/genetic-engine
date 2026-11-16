@@ -70,3 +70,19 @@ reported according to their observed outcomes.
 The shell's pub.dev DNS restriction still prevents upload. The Chrome GitHub
 session is signed out, so no claim is made that repository topics have been
 applied. No credential was extracted, copied into source, or sent to CI.
+
+## 2026-11-16 — Hosted publication confirmed
+
+- The maintainer executed the publication command; verified genetic_engine 0.3.0
+  on pub.dev rather than inferring success from the command alone.
+- Accessed the authenticated in-app browser and saved all eleven repository
+  topics; verified them in GitHub's rendered About section.
+- Set the repository website to the public package page.
+- Transferred package ownership to the existing `kleberandrade.dev` publisher;
+  observed the successful-transfer confirmation and verified publisher badge.
+- Checked pub.dev Scores: analysis is still pending; no score is claimed.
+- Updated the GitHub README with hosted installation, package-version and API
+  badges. The already uploaded 0.3.0 archive is immutable; its bundled README
+  will pick up these text changes with the next package publication.
+- Validation: metadata-only changes; checked relative links and git whitespace.
+  Runtime code remains the previously validated 38-test revision.
