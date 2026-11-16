@@ -2,7 +2,8 @@ import 'dart:math';
 import 'package:genetic_engine/genetic_engine.dart';
 import 'package:test/test.dart';
 
-GeneticAlgorithm<List<bool>> binary({int? seed = 42}) => GeneticAlgorithm(
+GeneticAlgorithm<List<bool>> binary({int? seed = 42}) =>
+    GeneticAlgorithm.withCallbacks(
       create: (r) => List.unmodifiable(List.generate(20, (_) => r.nextBool())),
       fitness: (g) => g.where((b) => b).length.toDouble(),
       select: tournamentSelection(),
@@ -21,7 +22,7 @@ GeneticAlgorithm<int> constant(
         int generations = 10,
         double Function(int)? fitness,
         int elitism = 1}) =>
-    GeneticAlgorithm(
+    GeneticAlgorithm.withCallbacks(
       create: (_) => 5,
       fitness: fitness ?? (g) => g.toDouble(),
       select: tournamentSelection(),
