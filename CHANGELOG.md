@@ -5,6 +5,19 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+## 0.3.0 — 2026-11-16
+
+- Add pluggable fixed/fractional elitism and the effective survivor count.
+- Add elite, rank, truncation and explicit-weight roulette selection.
+- Add two-point, cycle (CX), and partially mapped (PMX) crossover.
+- Add insertion, reverse-sequence and partial-shuffle mutation.
+- Add stateless generation, fitness, stagnation and elapsed-time termination,
+  composed with AND/OR, while retaining legacy stopping and a hard generation cap.
+- Add a travelling salesman example and deterministic operator semantics tests.
+- Map implementations to research articles and acknowledge GeneticSharp as
+  architectural inspiration without copying implementation code.
+- Record eleven desired repository topics separately from the five pub.dev topics.
+
 ## 0.2.1 — 2026-11-16
 
 - Move documentation from `docs/` to the conventional `doc/` directory.

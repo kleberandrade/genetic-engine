@@ -9,7 +9,7 @@ A **pure Dart genetic algorithm framework** for Flutter apps and Dart APIs.
 Compose typed strategies for your problem without modifying the evolution loop.
 No runtime dependencies, Flutter imports, or connection to a fuzzy engine.
 
-**Status:** pre-release 0.2.1. GitHub source is available; pub.dev publication is
+**Status:** pre-release 0.3.0. GitHub source is available; pub.dev publication is
 pending. Badges describe CI, SDK requirements, license and tags; there is no
 claim of pub.dev availability or a package score before publication.
 
@@ -20,7 +20,7 @@ dependencies:
   genetic_engine:
     git:
       url: https://github.com/kleberandrade/genetic-engine.git
-      ref: v0.2.1
+      ref: v0.3.0
 ```
 
 For local development, use `path: ../genetic_engine` instead. After publication,
@@ -70,12 +70,20 @@ stochastic heuristic: it does not guarantee the global optimum.
 | Custom immutable object | Your `Crossover<T>` | Your `Mutation<T>` |
 
 `TournamentSelection<T>` supports either objective, including negative fitness.
-All five extension points are interfaces: `GenomeFactory`, `FitnessEvaluator`,
+The main problem extension points are interfaces: `GenomeFactory`, `FitnessEvaluator`,
 `Selection`, `Crossover`, and `Mutation`. Functions can be wrapped using the
 `Callback...` adapters or passed to `GeneticAlgorithm.withCallbacks`.
 
+New in 0.3: fixed/fractional elite policies; elite, rank, truncation and roulette
+selection; two-point, CX and PMX crossover; insertion, reverse and partial shuffle
+mutation; AND/OR, elapsed-time and other stopping policies. See the catalogue for
+exact semantics. The [travelling salesman example](example/travelling_salesman.dart)
+combines permutation operators with fractional elitism.
+
 ## Learn and contribute
 
+- [Operator catalogue, elitism and composable stopping](doc/operators.md)
+- [Papers, implementation references and provenance](doc/references.md)
 - [Getting started, terminology and parameter guide](doc/getting_started.md)
 - [Architecture and dependency rules](doc/architecture.md)
 - [Custom operators and problem constraints](doc/extending.md)

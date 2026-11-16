@@ -11,7 +11,7 @@ implement those interfaces. A consumer composes them through one public import:
 flowchart TD
   Consumer["Flutter app or Dart service"] --> Engine["GeneticAlgorithm"]
   Consumer --> Strategies["Operators and callback adapters"]
-  Engine --> Contracts["Five strategy interfaces"]
+  Engine --> Contracts["Strategy interfaces"]
   Strategies --> Contracts
   Engine --> Domain["Domain values"]
   Contracts --> Domain
@@ -78,3 +78,12 @@ mutated nor re-evaluated; fitness should be deterministic for this behavior.
 
 See [integration](integration.md) for runtime boundaries and
 [extending](extending.md) for a complete custom strategy.
+
+## Additional policy boundaries (0.3)
+
+`Elitism` resolves an unchanged survivor count at engine construction.
+`Termination` evaluates immutable `EvolutionState` observations per generation;
+composite conditions retain no counters. The engine owns the stopwatch and all
+run state. Legacy integer elitism and callback constructors remain supported.
+Selection still receives one ranked population and returns one parent; no batch
+sampling or parallel execution contract is implied.

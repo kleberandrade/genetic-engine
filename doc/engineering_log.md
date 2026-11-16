@@ -51,3 +51,22 @@ reported according to their observed outcomes.
   short-lived repository token. No personal credential is copied to CI.
 - Prepared source release notes that explicitly distinguish GitHub distribution
   from the pending hosted pub.dev publication.
+
+## 2026-11-16 — Extended GA strategies (0.3.0)
+
+| Action | Reason and evidence |
+| --- | --- |
+| Consult GeneticSharp README and primary research | Use concepts and organization without copying implementation code; traceability in references.md |
+| Write new strategy tests before implementation | Observed expected missing-interface and missing-operator failures |
+| Add elite and termination interfaces | Keep survival count and stateless stopping independent from problem callbacks |
+| Add selection/crossover/mutation implementations | Extend the existing contracts with representation-safe operators |
+| Pin PMX, CX and list transformations with explicit cuts | Test semantics in addition to permutation membership |
+| Add stopping and configuration boundary tests | Validate generation cap, zero time limit, reuse, minimization and copied composite inputs |
+| Run full verification | 38 tests passed; 58 Dart files formatted; analyzer clean; four executable examples passed |
+| Run crapper, dryer at 0.8 and mutator scan | Tools still report no supported Dart files; no metric or mutation score claimed |
+| Prepare repository topics | Eleven desired topics in .github/topics.json; actual GitHub update requires an authenticated administrative session |
+| Preserve prior source release | Source 0.3.0 adds features without rewriting the existing public version tags |
+
+The shell's pub.dev DNS restriction still prevents upload. The Chrome GitHub
+session is signed out, so no claim is made that repository topics have been
+applied. No credential was extracted, copied into source, or sent to CI.

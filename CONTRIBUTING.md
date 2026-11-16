@@ -30,6 +30,7 @@ dart test
 dart run example/genetic_engine_example.dart
 dart run example/minimize.dart
 dart run example/custom_mutation.dart
+dart run example/travelling_salesman.dart
 dart pub publish --dry-run
 ```
 
@@ -55,3 +56,16 @@ Their empty output is not evidence of low complexity, no duplication, or mutatio
 coverage. Record tool limitations honestly and use Dart-aware checks.
 
 Contributions are licensed under the repository's MIT license.
+
+## Repository topics
+
+The desired GitHub topics are recorded in `.github/topics.json`. A maintainer
+with an authenticated GitHub CLI and repository administration permission can
+apply them with:
+
+```sh
+gh api --method PUT repos/kleberandrade/genetic-engine/topics --input .github/topics.json
+```
+
+Committing that file alone does not change GitHub's repository metadata. The
+package's five pub.dev topics are configured independently in `pubspec.yaml`.

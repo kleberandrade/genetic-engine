@@ -70,7 +70,7 @@ immutable. `meanFitness` reports the population mean.
 differ from `result.lastGeneration.best`. History is not stored automatically;
 collect statistics in `onGeneration` if needed.
 
-Stop priority is target, cancellation, stagnation, then generation limit. A
+Stop priority is target, cancellation, stagnation, then custom termination, then generation limit. A
 cancellation callback cannot interrupt a fitness evaluation. A seeded run is
 repeatable with deterministic callbacks using only the supplied random source
 on the same Dart runtime; cross-runtime random sequences are not promised.
