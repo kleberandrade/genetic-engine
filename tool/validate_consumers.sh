@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 mode="${1:-dart}"
-version="${GENETIC_ENGINE_VERSION:-0.3.1}"
+version="${GENETIC_ENGINE_VERSION:-0.4.0}"
 if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo 'Expected an exact stable package version' >&2
   exit 1
@@ -24,13 +24,15 @@ dependencies:
   genetic_engine: $version
 YAML
     cp "$script_dir/consumer_fixtures/dart/main.dart.template" "$work/bin/main.dart"
-    cp "$script_dir/benchmarks/evolution_benchmark.dart" "$work/bin/benchmark.dart"
+    cp "$script_dir/benchmarks/evolution_benchmark.dart" "$work/bin/evolution_benchmark.dart"
+    cp "$script_dir/benchmarks/selection_benchmark.dart" "$work/bin/selection_benchmark.dart"
     cd "$work"
     dart pub get
     dart "$script_dir/verify_hosted.dart" "$version"
     dart analyze --fatal-infos
     dart run bin/main.dart
-    dart run bin/benchmark.dart "$report_dir" "pub.dev:$version"
+    dart run bin/evolution_benchmark.dart "$report_dir" "pub.dev:$version"
+    dart run bin/selection_benchmark.dart "$report_dir" "pub.dev:$version"
     cp pubspec.lock "$report_dir/dart-pubspec.lock"
     ;;
   flutter)

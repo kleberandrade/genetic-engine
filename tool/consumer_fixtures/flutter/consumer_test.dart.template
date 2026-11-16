@@ -6,8 +6,11 @@ void main() {
   test('published package works with Flutter compute', () async {
     expect(await compute(solve, 42), 32);
   });
+  test('published SUS works with Flutter compute', () async {
+    expect(await compute(solveSus, 42), 32);
+  });
   testWidgets('app renders optimization result from the hosted package', (tester) async {
-    final result = await tester.runAsync(() => compute(solve, 42));
+    final result = await tester.runAsync(() => compute(solveSus, 42));
     expect(result, 32);
     await tester.pumpWidget(ConsumerApp(result: Future.value(
         result ?? (throw StateError('No optimization result')))));

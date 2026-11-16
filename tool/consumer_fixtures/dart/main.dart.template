@@ -6,12 +6,15 @@ void check(bool condition, String message) {
   if (!condition) throw StateError(message);
 }
 
-double solveBinary() {
+double solveBinary({bool useSus = false}) {
   return GeneticAlgorithm<List<bool>>(
     factory: CallbackGenomeFactory((r) =>
         List.unmodifiable(List.generate(32, (_) => r.nextBool()))),
     evaluator: CallbackFitnessEvaluator((g) => g.where((b) => b).length.toDouble()),
-    selection: TournamentSelection(), crossover: SinglePointCrossover(),
+    selection: useSus ? null : TournamentSelection(),
+    batchSelection: useSus ? StochasticUniversalSamplingSelection(
+        weight: (c) => c.fitness + 1) : null,
+    crossover: SinglePointCrossover(),
     mutation: const BitFlipMutation(), mutationRate: 0.3,
     targetFitness: 32, maxGenerations: 200, seed: 42,
   ).run().best.fitness;
@@ -19,6 +22,9 @@ double solveBinary() {
 
 Future<void> main() async {
   check(solveBinary() == 32, 'Published binary optimization failed');
+  check(solveBinary(useSus: true) == 32, 'Published SUS optimization failed');
+  check(await Isolate.run(() => solveBinary(useSus: true)) == 32,
+      'Published SUS isolate execution failed');
   check(await Isolate.run(solveBinary) == 32, 'Published isolate execution failed');
   final minimum = GeneticAlgorithm<int>.withCallbacks(
     create: (_) => 5, fitness: (g) => g.toDouble(),
@@ -32,5 +38,5 @@ Future<void> main() async {
   final permutation = const PartiallyMappedCrossover<int>().cross(
       [1,2,3,4], [4,3,2,1], Random(7));
   check(permutation.toSet().length == 4, 'Published PMX lost genes');
-  print('PASS: hosted binary, native isolate, minimization and permutation operators');
+  print('PASS: tournament/SUS binary, native isolates, minimization and permutation operators');
 }

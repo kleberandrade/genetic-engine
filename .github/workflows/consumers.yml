@@ -3,7 +3,7 @@ on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 env:
-  GENETIC_ENGINE_VERSION: '0.3.1'
+  GENETIC_ENGINE_VERSION: '0.4.0'
   CONSUMER_REPORT_DIR: ${{ github.workspace }}/.consumer-reports
 jobs:
   dart:
@@ -17,7 +17,7 @@ jobs:
           sdk: stable
       - run: bash tool/validate_consumers.sh dart
       - name: Record benchmark evidence
-        run: cat .consumer-reports/benchmark.md >> "$GITHUB_STEP_SUMMARY"
+        run: cat .consumer-reports/benchmark.md .consumer-reports/selection.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
@@ -37,7 +37,7 @@ jobs:
       - run: bash tool/validate_consumers.sh flutter
       - name: Record consumer evidence
         run: |
-          printf '## Flutter consumer\n\nHosted genetic_engine 0.3.1: analysis, compute, widget test and release web build passed.\n' >> "$GITHUB_STEP_SUMMARY"
+          printf '## Flutter consumer\n\nHosted genetic_engine %s: analysis, tournament/SUS compute, widget test and release web build passed.\n' "$GENETIC_ENGINE_VERSION" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           include-hidden-files: true
