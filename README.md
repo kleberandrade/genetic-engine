@@ -20,7 +20,7 @@ publisher [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).
 
 ```yaml
 dependencies:
-  genetic_engine: ^0.3.1
+  genetic_engine: ^0.4.0
 ```
 
 Or add it from your project directory:
@@ -32,9 +32,10 @@ dart pub add genetic_engine
 For Flutter projects, `flutter pub add genetic_engine` works too. Import
 `package:genetic_engine/genetic_engine.dart` to use the framework.
 
-The current source revision prepares **0.4.0**, adding batch selection and SUS.
-Until 0.4.0 is published, use a local `path: ../genetic_engine` dependency for
-those additions. The hosted consumer CI remains pinned to published 0.3.1.
+Version **0.4.0** is published with batch selection and SUS. Its pub.dev analysis
+reached **160/160 points**, including 50/50 for static analysis. Hosted consumer CI
+pins exactly 0.4.0 to validate installation independently of repository source.
+For the latest examples added after publication, run from the repository checkout.
 
 ## Your first optimization
 
@@ -112,12 +113,16 @@ Existing single-parent strategies keep their original on-demand behavior.
 | [Eight queens](example/eight_queens.dart) | Constraint-preserving encoding and SUS |
 | [Password](example/password.dart) | Custom letter mutation and SUS |
 | [Knapsack](example/knapsack.dart) | Finite penalties and feasibility |
+| [Task scheduling](example/task_scheduling.dart) | Integer assignments, load balancing and makespan |
+| [Parameter fitting](example/parameter_fitting.dart) | Bounded coefficients and mean squared error |
 | [Custom mutation](example/custom_mutation.dart) | Implementing a framework interface |
 
 ```sh
 dart run example/eight_queens.dart
 dart run example/password.dart
 dart run example/knapsack.dart
+dart run example/task_scheduling.dart
+dart run example/parameter_fitting.dart
 ```
 
 The [example walkthroughs](doc/examples.md) explain the genome, fitness,
@@ -128,6 +133,7 @@ all Dart implementations are original.
 ## Learn and contribute
 
 - [Published consumer validation and benchmark methodology](doc/validation.md)
+- [Selector comparison: 180 multi-seed local runs](doc/benchmarks/local-0.4.0-selectors/selection.md)
 - [Parent selection, SUS and batch extension](doc/selection.md)
 - [Examples and problem modeling](doc/examples.md)
 - [Operator catalogue, elitism and composable stopping](doc/operators.md)
@@ -154,6 +160,8 @@ dart run example/travelling_salesman.dart
 dart run example/eight_queens.dart
 dart run example/password.dart
 dart run example/knapsack.dart
+dart run example/task_scheduling.dart
+dart run example/parameter_fitting.dart
 dart pub publish --dry-run
 ```
 

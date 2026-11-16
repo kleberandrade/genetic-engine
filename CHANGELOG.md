@@ -5,6 +5,14 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Confirm hosted 0.4.0 publication and 160/160 pub.dev points; update installation.
+- Pin independent Dart/Flutter consumers to hosted 0.4.0 and exercise SUS in native
+  isolates, Flutter compute, widget rendering and release web compilation.
+- Add task scheduling and bounded parameter-fitting examples with independent
+  checks of schedule optimality and fitting error.
+- Add a 180-run selector comparison with raw per-seed evidence, shared evaluation
+  budgets and explicit interpretation limits; run it in hosted consumer CI.
+
 ## 0.4.0 — 2026-11-16
 
 - Add `BatchSelection<T>` and genuine stochastic universal sampling with explicit

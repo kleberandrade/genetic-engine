@@ -1,6 +1,6 @@
 # Published package validation
 
-Version under test: **genetic_engine 0.3.1** from pub.dev. Its quality report was
+Version under test: **genetic_engine 0.4.0** from pub.dev. Its quality report was
 observed at **160/160**, including **50/50** static-analysis points on 2026-11-16.
 [Current pub.dev report](https://pub.dev/packages/genetic_engine/score).
 
@@ -15,8 +15,8 @@ Development tooling is excluded from package uploads by `.pubignore`.
 
 | Consumer | Checks |
 | --- | --- |
-| Dart VM | Hosted resolution; binary optimum; native isolate; minimization; PMX invariants |
-| Flutter | Hosted resolution; analysis; compute callback; widget renders the result; release web compilation |
+| Dart VM | Hosted resolution; tournament/SUS binary optima; native isolates; minimization; PMX invariants |
+| Flutter | Hosted resolution; analysis; tournament/SUS compute callbacks; widget renders the result; release web compilation |
 
 The Flutter test verifies a real result computed by the published engine, not a
 mocked text value. The web step establishes compilation for the browser target;
@@ -32,23 +32,22 @@ bash tool/validate_consumers.sh flutter
 
 An optional `CONSUMER_REPORT_DIR` selects where lockfiles and benchmark evidence
 are retained. `GENETIC_ENGINE_VERSION` accepts an exact stable version. CI pins it
-to 0.3.1 deliberately; testing the published version and testing the working tree
+to 0.4.0 deliberately; testing the published version and testing the working tree
 serve different purposes.
 
-The `Published package consumers` workflow runs both jobs. Both passed on
-2026-11-16 in [run 43900206559](https://github.com/kleberandrade/genetic-engine/actions/runs/43900206559)
-for source commit `897fd20`:
+The workflow now exercises published SUS in addition to the existing tournament,
+minimization and permutation checks. It also generates the selector comparison
+inside the fresh hosted Dart project. Completion evidence for this updated pin
+must come from a successful GitHub run; source-only checks do not establish it.
 
-- Hosted Dart consumer and benchmark: **passed** (16 seconds).
-- Hosted Flutter consumer, compute/widget checks and release web build:
-  **passed** (1 minute 20 seconds).
-- Both scoped evidence artifacts were uploaded successfully, retaining the
-  resolved lockfiles and the Dart benchmark's per-seed JSON and Markdown report.
+### Historical consumer evidence (0.3.1)
 
-This is evidence of actual hosted installation, distinct from the local baseline.
-CI benchmarks also reached all 90 configured targets. The hosted Dart run used
-Dart 3.14.0 on Linux; the local report uses Dart 3.11.5 on macOS. Do not compare
-their timings as a controlled hardware or runtime experiment.
+Both consumers passed on 2026-11-16 in
+[run 43900206559](https://github.com/kleberandrade/genetic-engine/actions/runs/43900206559)
+for commit `897fd20`: Dart plus benchmarks passed in 16 seconds, and Flutter
+compute/widget checks and release web compilation passed in 1 minute 20 seconds.
+Both artifacts were uploaded. All 90 baseline targets were reached. This remains
+historical evidence for 0.3.1, not validation of the newer hosted pin.
 
 ## Performance and convergence baseline
 
@@ -74,10 +73,38 @@ production defaults. A target hit measures that target, not a global guarantee.
 No time threshold is used as a CI gate: shared runners are too variable for that.
 Correctness tests and hosted integration failures remain hard failures.
 
+## Selector comparison (0.4.0)
+
+- [Local comparison report](benchmarks/local-0.4.0-selectors/selection.md)
+- [Raw per-seed results](benchmarks/local-0.4.0-selectors/selection.json)
+- [Benchmark source](../tool/benchmarks/selection_benchmark.dart)
+
+```sh
+dart run tool/benchmarks/selection_benchmark.dart .consumer-reports source-checkout
+```
+
+The local library was verified unchanged from v0.4.0. Two problems, three
+selectors and 30 seeds give 180 measured runs, plus six excluded warmups. The
+experiment fixes population, elites, crossover/mutation settings and per-problem
+generation caps. It records actual fitness evaluations because target hits stop
+early. Each selector starts with the same initial population for each seed;
+configuration order is shuffled to reduce systematic timing-order effects.
+
+All 180 local runs reached their configured target. For OneMax32 the median
+fitness-evaluation counts were 1,189 (tournament), 4,753 (roulette) and 4,208.5
+(SUS). For Sphere2D they were 1,387, 1,337.5 and 1,733.5 respectively. This does
+not establish a universal ranking: tournament pressure and fitness-proportionate
+pressure are not calibrated to match. The weight transform is identical between
+roulette and SUS within each problem. Library roulette evaluates weights per
+parent draw; SUS evaluates them once per batch, affecting measured runtime.
+
+Raw results and the report record runtime/SDK/hardware context, failures as well
+as successes, and timing methodology. CI repeats the same comparison with
+`pub.dev:0.4.0` as the source label; hosted timing results should be interpreted
+within their own environment, separately from this macOS baseline.
+
 ## Next development boundary
 
-Batch selection (including stochastic universal sampling) needs a genuine batch
-contract. Parallel or isolate execution needs explicit progress, cancellation and
-sendability semantics. Establish the consumer and benchmark evidence first, then
-add those capabilities in separately testable changes rather than altering the
-published 0.3.1 behavior during validation.
+SUS now has its explicit batch contract. Execution parallelism still requires
+separate progress, cancellation and sendability semantics. Keep those concerns
+outside the core until their contracts and consumer behavior can be verified.

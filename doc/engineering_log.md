@@ -168,3 +168,32 @@ applied. No credential was extracted, copied into source, or sent to CI.
   including the package dry-run, analyzer, tests and all examples.
 - Crapper/dryer/mutator remain unsupported for Dart as recorded above; no empty
   metric report is treated as evidence.
+
+## 2026-11-16 — Hosted 0.4.0, applied examples and selector comparison
+
+- Observed published genetic_engine 0.4.0 on pub.dev with 160/160 points and
+  50/50 static analysis, then updated README installation to ^0.4.0.
+- Pinned independent consumer resolution to exactly hosted 0.4.0. Added actual
+  SUS execution in native Dart isolates and Flutter compute/widget fixtures;
+  retained tournament checks and release web compilation. The shell still lacks
+  pub.dev network access, so hosted installation requires networked CI evidence.
+- Wrote applied-example tests first and observed missing example/function errors.
+  Implemented independent-job scheduling and bounded line-parameter fitting.
+  Tests recompute machine loads/lower bounds and residual errors independently.
+- Local seed-42 schedule reaches loads [15,15,15], matching the work lower bound;
+  fitted slope/intercept are about 2.0222/1.0251 with MSE 0.00162. Documented model
+  assumptions and the more direct least-squares alternative for this simple fit.
+- Added a reproducible selector experiment: two landscapes, three strategies,
+  30 seeds each, identical initial populations, shuffled configuration order,
+  six excluded warmups and raw per-seed fitness/evaluation/time records.
+- Verified all 180 local target hits, identical per-seed initial fitness across
+  selectors, and exact actual evaluation budgets. Saved reports under doc/ with
+  the source-v0.4.0-library label after confirming no library diff from that tag.
+- Record actual evaluations alongside runtime because target hits stop early;
+  tournament and fitness-weight pressure are not calibrated to be equal.
+- Local validation: 53 tests, analyzer, format, shell syntax and documentation
+  links passed. Dart consumer fixture also ran against local source only; this
+  is not claimed as hosted-resolution evidence. Crapper/dryer/mutator remain
+  unsupported for Dart; no metric or mutation score is fabricated.
+- No library change, version bump or retagging: new examples/docs are on main,
+  while the immutable published 0.4.0 archive and tag remain intact.

@@ -34,6 +34,8 @@ dart run example/travelling_salesman.dart
 dart run example/eight_queens.dart
 dart run example/password.dart
 dart run example/knapsack.dart
+dart run example/task_scheduling.dart
+dart run example/parameter_fitting.dart
 dart pub publish --dry-run
 ```
 
@@ -80,3 +82,7 @@ After source checks pass, the dedicated `Published package consumers` workflow
 resolves the pinned hosted version in fresh Dart and Flutter projects. Run
 `bash tool/validate_consumers.sh dart` and the `flutter` variant when developing
 those checks. See `doc/validation.md` for exact scope and evidence limitations.
+
+For selector experiments, run `dart run tool/benchmarks/selection_benchmark.dart
+.consumer-reports source-checkout`. Keep raw seed results and environment metadata;
+report target success and actual evaluation counts alongside timing.
