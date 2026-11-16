@@ -89,6 +89,8 @@ combines permutation operators with fractional elitism.
 
 ## Learn and contribute
 
+- [Published consumer validation and benchmark methodology](doc/validation.md)
+
 - [Operator catalogue, elitism and composable stopping](doc/operators.md)
 - [Papers, implementation references and provenance](doc/references.md)
 - [Getting started, terminology and parameter guide](doc/getting_started.md)

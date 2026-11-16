@@ -5,6 +5,11 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Add isolated Dart and Flutter consumer checks pinned to hosted version 0.3.1,
+  including native compute/widget validation and a release web build.
+- Add a reproducible multi-seed benchmark and source-labeled local baseline.
+- Exclude development tooling from future package archives.
+
 ## 0.3.1 — 2026-11-16
 
 - Add braces to the mutation branch and empty AND/OR termination guards,

@@ -1,0 +1,18 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:genetic_engine_flutter_consumer/main.dart';
+
+void main() {
+  test('published package works with Flutter compute', () async {
+    expect(await compute(solve, 42), 32);
+  });
+  testWidgets('app renders optimization result from the hosted package', (tester) async {
+    final result = await tester.runAsync(() => compute(solve, 42));
+    expect(result, 32);
+    await tester.pumpWidget(ConsumerApp(result: Future.value(
+        result ?? (throw StateError('No optimization result')))));
+    await tester.pump();
+    expect(find.text('Fitness: 32'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+}

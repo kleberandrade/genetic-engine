@@ -1,0 +1,28 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:genetic_engine/genetic_engine.dart';
+
+double solve(int seed) => GeneticAlgorithm<List<bool>>(
+  factory: CallbackGenomeFactory((r) =>
+      List.unmodifiable(List.generate(32, (_) => r.nextBool()))),
+  evaluator: CallbackFitnessEvaluator((g) => g.where((b) => b).length.toDouble()),
+  selection: TournamentSelection(), crossover: SinglePointCrossover(),
+  mutation: const BitFlipMutation(), mutationRate: 0.3,
+  targetFitness: 32, maxGenerations: 200, seed: seed,
+).run().best.fitness;
+
+void main() => runApp(const ConsumerApp());
+
+class ConsumerApp extends StatelessWidget {
+  const ConsumerApp({super.key, this.result});
+  final Future<double>? result;
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    home: Scaffold(body: FutureBuilder<double>(
+      future: result ?? compute(solve, 42),
+      builder: (context, snapshot) => Center(child: Text(
+        snapshot.hasData ? 'Fitness: ${snapshot.data!.toInt()}' : 'Optimizing',
+      )),
+    )),
+  );
+}

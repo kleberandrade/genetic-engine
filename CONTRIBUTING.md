@@ -69,3 +69,11 @@ gh api --method PUT repos/kleberandrade/genetic-engine/topics --input .github/to
 
 Committing that file alone does not change GitHub's repository metadata. The
 package's five pub.dev topics are configured independently in `pubspec.yaml`.
+
+
+## Published consumer validation
+
+After source checks pass, the dedicated `Published package consumers` workflow
+resolves the pinned hosted version in fresh Dart and Flutter projects. Run
+`bash tool/validate_consumers.sh dart` and the `flutter` variant when developing
+those checks. See `doc/validation.md` for exact scope and evidence limitations.

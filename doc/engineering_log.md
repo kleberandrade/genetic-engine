@@ -99,3 +99,21 @@ applied. No credential was extracted, copied into source, or sent to CI.
   README in the new archive. The hosted 0.3.0 archive remains unchanged.
 - The pub.dev score must be confirmed after uploading and analyzing the patch;
   fixing source alone does not change the old published version's score.
+
+## 2026-11-16 — Published consumer and benchmark validation
+
+- Confirmed pub.dev 0.3.1 reached 160/160, with 50/50 static analysis.
+- Kept the library unchanged from the published v0.3.1 source tag.
+- Added generated consumer projects outside the repository, exact hosted-version
+  pinning, and lockfile/cache checks that reject path overrides.
+- Added real Dart optimization/isolate checks and Flutter compute/widget checks
+  plus release web compilation. The dedicated CI jobs must supply completion
+  evidence before hosted consumer success is claimed.
+- Added nine benchmark configurations with seeds 0–9 and explicit warmup,
+  environment, success and percentile methodology. The source-equivalent local
+  baseline reached configured targets in all 90 measured runs. Raw results and
+  scope limitations are committed under doc/benchmarks/.
+- Validated script syntax, Dart tooling analysis and documentation links locally.
+- The local shell still cannot resolve pub.dev, so actual hosted consumer
+  installation and Flutter validation are assigned to the networked CI runner.
+- No new runtime feature or package release is introduced by this validation work.

@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "source": "workspace-lib-identical-to-v0.3.1",
+  "startedAtUtc": "2026-11-16T15:43:34.047336Z",
+  "runtime": "Dart VM (JIT)",
+  "sdk": "3.11.5 (stable) (Wed Apr 15 00:36:32 2026 -0700) on \"macos_arm64\"",
+  "os": "macos",
+  "processors": 8,
+  "warmupRunsPerConfiguration": 1,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "trials": [
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 0,
+      "microseconds": 3468,
+      "generations": 16,
+      "initialFitness": 21.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 1,
+      "microseconds": 1750,
+      "generations": 12,
+      "initialFitness": 25.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 2,
+      "microseconds": 1109,
+      "generations": 10,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 3,
+      "microseconds": 1336,
+      "generations": 14,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 4,
+      "microseconds": 1688,
+      "generations": 19,
+      "initialFitness": 19.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 5,
+      "microseconds": 1041,
+      "generations": 16,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 6,
+      "microseconds": 1040,
+      "generations": 15,
+      "initialFitness": 20.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 7,
+      "microseconds": 841,
+      "generations": 12,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 8,
+      "microseconds": 1028,
+      "generations": 17,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 50,
+      "seed": 9,
+      "microseconds": 1695,
+      "generations": 17,
+      "initialFitness": 21.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 0,
+      "microseconds": 1323,
+      "generations": 12,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 1,
+      "microseconds": 999,
+      "generations": 10,
+      "initialFitness": 25.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 2,
+      "microseconds": 1028,
+      "generations": 11,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 3,
+      "microseconds": 1370,
+      "generations": 13,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 4,
+      "microseconds": 1112,
+      "generations": 11,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 5,
+      "microseconds": 1118,
+      "generations": 10,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 6,
+      "microseconds": 1134,
+      "generations": 12,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 7,
+      "microseconds": 1130,
+      "generations": 12,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 8,
+      "microseconds": 852,
+      "generations": 9,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 100,
+      "seed": 9,
+      "microseconds": 883,
+      "generations": 9,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 0,
+      "microseconds": 3155,
+      "generations": 13,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 1,
+      "microseconds": 1926,
+      "generations": 8,
+      "initialFitness": 25.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 2,
+      "microseconds": 1993,
+      "generations": 7,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 3,
+      "microseconds": 2726,
+      "generations": 11,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 4,
+      "microseconds": 2365,
+      "generations": 10,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 5,
+      "microseconds": 1643,
+      "generations": 6,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 6,
+      "microseconds": 2525,
+      "generations": 10,
+      "initialFitness": 22.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 7,
+      "microseconds": 2509,
+      "generations": 10,
+      "initialFitness": 25.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 8,
+      "microseconds": 2023,
+      "generations": 8,
+      "initialFitness": 23.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "OneMax32",
+      "population": 250,
+      "seed": 9,
+      "microseconds": 2109,
+      "generations": 9,
+      "initialFitness": 24.0,
+      "bestFitness": 32.0,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 0,
+      "microseconds": 872,
+      "generations": 26,
+      "initialFitness": 0.5168388862632542,
+      "bestFitness": 0.0005223720835079276,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 1,
+      "microseconds": 587,
+      "generations": 18,
+      "initialFitness": 1.7075570006613972,
+      "bestFitness": 0.0008675046106040012,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 2,
+      "microseconds": 459,
+      "generations": 17,
+      "initialFitness": 0.5973644511845746,
+      "bestFitness": 0.0008124249911607457,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 3,
+      "microseconds": 896,
+      "generations": 30,
+      "initialFitness": 0.8207427108761696,
+      "bestFitness": 0.000873613862257857,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 4,
+      "microseconds": 659,
+      "generations": 18,
+      "initialFitness": 0.1580103952324738,
+      "bestFitness": 0.0008277833015681603,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 5,
+      "microseconds": 625,
+      "generations": 24,
+      "initialFitness": 1.5594954721403569,
+      "bestFitness": 0.00001913527711988288,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 6,
+      "microseconds": 844,
+      "generations": 34,
+      "initialFitness": 0.38255466231112034,
+      "bestFitness": 0.000047912878168295905,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 7,
+      "microseconds": 644,
+      "generations": 36,
+      "initialFitness": 0.030868664856796287,
+      "bestFitness": 0.00014989087844133835,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 8,
+      "microseconds": 588,
+      "generations": 32,
+      "initialFitness": 0.11542528635174407,
+      "bestFitness": 0.0003636806711054775,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 50,
+      "seed": 9,
+      "microseconds": 384,
+      "generations": 22,
+      "initialFitness": 0.13053710917204342,
+      "bestFitness": 0.0008893365883311166,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 0,
+      "microseconds": 510,
+      "generations": 12,
+      "initialFitness": 0.09509039017809943,
+      "bestFitness": 0.0007678035120756491,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 1,
+      "microseconds": 516,
+      "generations": 13,
+      "initialFitness": 0.1590597814470108,
+      "bestFitness": 0.0003121437350340688,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 2,
+      "microseconds": 439,
+      "generations": 10,
+      "initialFitness": 0.28219334072036134,
+      "bestFitness": 0.0008124249911607457,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 3,
+      "microseconds": 366,
+      "generations": 9,
+      "initialFitness": 0.028231596732313548,
+      "bestFitness": 0.0004914906672019543,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 4,
+      "microseconds": 356,
+      "generations": 9,
+      "initialFitness": 0.1580103952324738,
+      "bestFitness": 0.0008663700475491693,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 5,
+      "microseconds": 149,
+      "generations": 3,
+      "initialFitness": 0.2830651192192286,
+      "bestFitness": 0.000316230844611633,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 6,
+      "microseconds": 144,
+      "generations": 2,
+      "initialFitness": 0.03453111666760386,
+      "bestFitness": 0.0005445784419861149,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 7,
+      "microseconds": 710,
+      "generations": 19,
+      "initialFitness": 0.030868664856796287,
+      "bestFitness": 0.0008991239337875125,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 8,
+      "microseconds": 638,
+      "generations": 16,
+      "initialFitness": 0.11542528635174407,
+      "bestFitness": 0.0004742804007962436,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 100,
+      "seed": 9,
+      "microseconds": 494,
+      "generations": 14,
+      "initialFitness": 0.13053710917204342,
+      "bestFitness": 0.0008863918018802051,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 0,
+      "microseconds": 1079,
+      "generations": 10,
+      "initialFitness": 0.09509039017809943,
+      "bestFitness": 0.0007197011690672496,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 1,
+      "microseconds": 1206,
+      "generations": 10,
+      "initialFitness": 0.1590597814470108,
+      "bestFitness": 0.0009337287502491692,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 2,
+      "microseconds": 1020,
+      "generations": 9,
+      "initialFitness": 0.28219334072036134,
+      "bestFitness": 0.00018171281295369215,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 3,
+      "microseconds": 1371,
+      "generations": 13,
+      "initialFitness": 0.028231596732313548,
+      "bestFitness": 0.000873613862257857,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 4,
+      "microseconds": 1632,
+      "generations": 16,
+      "initialFitness": 0.1580103952324738,
+      "bestFitness": 0.00022529708726764505,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 5,
+      "microseconds": 503,
+      "generations": 5,
+      "initialFitness": 0.01922037416227016,
+      "bestFitness": 0.0002368526338071474,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 6,
+      "microseconds": 1177,
+      "generations": 11,
+      "initialFitness": 0.03453111666760386,
+      "bestFitness": 0.0005572013004822101,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 7,
+      "microseconds": 719,
+      "generations": 6,
+      "initialFitness": 0.030868664856796287,
+      "bestFitness": 0.00013335621446941236,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 8,
+      "microseconds": 90,
+      "generations": 0,
+      "initialFitness": 0.00032326864317004737,
+      "bestFitness": 0.00032326864317004737,
+      "success": true
+    },
+    {
+      "problem": "Sphere2D",
+      "population": 250,
+      "seed": 9,
+      "microseconds": 2214,
+      "generations": 22,
+      "initialFitness": 0.12182447367211592,
+      "bestFitness": 0.0007204473506027977,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 0,
+      "microseconds": 1719,
+      "generations": 6,
+      "initialFitness": 8.503020513419662,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 1,
+      "microseconds": 1337,
+      "generations": 7,
+      "initialFitness": 8.287719318426225,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 2,
+      "microseconds": 906,
+      "generations": 6,
+      "initialFitness": 7.420628313127266,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 3,
+      "microseconds": 976,
+      "generations": 5,
+      "initialFitness": 8.592201188381077,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 4,
+      "microseconds": 2173,
+      "generations": 11,
+      "initialFitness": 9.088806951046566,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 5,
+      "microseconds": 628,
+      "generations": 3,
+      "initialFitness": 7.420628313127267,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 6,
+      "microseconds": 1254,
+      "generations": 8,
+      "initialFitness": 8.50302051341966,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 7,
+      "microseconds": 118,
+      "generations": 0,
+      "initialFitness": 6.122934917841436,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 8,
+      "microseconds": 290,
+      "generations": 2,
+      "initialFitness": 8.718321708413097,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 50,
+      "seed": 9,
+      "microseconds": 702,
+      "generations": 6,
+      "initialFitness": 9.088806951046564,
+      "bestFitness": 6.1229349178414365,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 0,
+      "microseconds": 745,
+      "generations": 3,
+      "initialFitness": 8.50302051341966,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 1,
+      "microseconds": 1275,
+      "generations": 5,
+      "initialFitness": 8.287719318426225,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 2,
+      "microseconds": 900,
+      "generations": 4,
+      "initialFitness": 7.420628313127266,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 3,
+      "microseconds": 282,
+      "generations": 1,
+      "initialFitness": 8.287719318426225,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 4,
+      "microseconds": 1213,
+      "generations": 7,
+      "initialFitness": 9.088806951046566,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 5,
+      "microseconds": 961,
+      "generations": 6,
+      "initialFitness": 7.420628313127267,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 6,
+      "microseconds": 720,
+      "generations": 5,
+      "initialFitness": 8.50302051341966,
+      "bestFitness": 6.1229349178414365,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 7,
+      "microseconds": 124,
+      "generations": 0,
+      "initialFitness": 6.122934917841436,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 8,
+      "microseconds": 357,
+      "generations": 2,
+      "initialFitness": 8.718321708413097,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 100,
+      "seed": 9,
+      "microseconds": 641,
+      "generations": 5,
+      "initialFitness": 9.088806951046564,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 0,
+      "microseconds": 1326,
+      "generations": 4,
+      "initialFitness": 8.287719318426223,
+      "bestFitness": 6.1229349178414365,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 1,
+      "microseconds": 1057,
+      "generations": 4,
+      "initialFitness": 7.420628313127267,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 2,
+      "microseconds": 775,
+      "generations": 3,
+      "initialFitness": 7.420628313127266,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 3,
+      "microseconds": 1585,
+      "generations": 6,
+      "initialFitness": 8.287719318426225,
+      "bestFitness": 6.1229349178414365,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 4,
+      "microseconds": 110,
+      "generations": 0,
+      "initialFitness": 6.122934917841436,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 5,
+      "microseconds": 541,
+      "generations": 2,
+      "initialFitness": 7.420628313127266,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 6,
+      "microseconds": 936,
+      "generations": 4,
+      "initialFitness": 7.420628313127267,
+      "bestFitness": 6.1229349178414365,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 7,
+      "microseconds": 90,
+      "generations": 0,
+      "initialFitness": 6.122934917841436,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 8,
+      "microseconds": 1377,
+      "generations": 6,
+      "initialFitness": 8.50302051341966,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    },
+    {
+      "problem": "CircleTSP8",
+      "population": 250,
+      "seed": 9,
+      "microseconds": 477,
+      "generations": 2,
+      "initialFitness": 8.287719318426225,
+      "bestFitness": 6.122934917841436,
+      "success": true
+    }
+  ]
+}

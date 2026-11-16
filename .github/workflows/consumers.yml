@@ -1,0 +1,42 @@
+name: Published package consumers
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+env:
+  GENETIC_ENGINE_VERSION: '0.3.1'
+  CONSUMER_REPORT_DIR: ${{ github.workspace }}/.consumer-reports
+jobs:
+  dart:
+    name: Hosted Dart consumer and benchmarks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+      - run: bash tool/validate_consumers.sh dart
+      - name: Record benchmark evidence
+        run: cat .consumer-reports/benchmark.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dart-hosted-consumer-evidence
+          path: .consumer-reports/
+  flutter:
+    name: Hosted Flutter consumer, compute and web build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - run: bash tool/validate_consumers.sh flutter
+      - name: Record consumer evidence
+        run: |
+          printf '## Flutter consumer\n\nHosted genetic_engine 0.3.1: analysis, compute, widget test and release web build passed.\n' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flutter-hosted-consumer-evidence
+          path: .consumer-reports/flutter-pubspec.lock

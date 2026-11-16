@@ -1,0 +1,36 @@
+import 'dart:isolate';
+import 'dart:math';
+import 'package:genetic_engine/genetic_engine.dart';
+
+void check(bool condition, String message) {
+  if (!condition) throw StateError(message);
+}
+
+double solveBinary() {
+  return GeneticAlgorithm<List<bool>>(
+    factory: CallbackGenomeFactory((r) =>
+        List.unmodifiable(List.generate(32, (_) => r.nextBool()))),
+    evaluator: CallbackFitnessEvaluator((g) => g.where((b) => b).length.toDouble()),
+    selection: TournamentSelection(), crossover: SinglePointCrossover(),
+    mutation: const BitFlipMutation(), mutationRate: 0.3,
+    targetFitness: 32, maxGenerations: 200, seed: 42,
+  ).run().best.fitness;
+}
+
+Future<void> main() async {
+  check(solveBinary() == 32, 'Published binary optimization failed');
+  check(await Isolate.run(solveBinary) == 32, 'Published isolate execution failed');
+  final minimum = GeneticAlgorithm<int>.withCallbacks(
+    create: (_) => 5, fitness: (g) => g.toDouble(),
+    select: (ranked, _) => ranked.first.genome,
+    crossover: (a,b,_) => a, mutate: (g,_) => g - 1,
+    objective: Objective.minimize, mutationRate: 1,
+    targetFitness: 0, maxGenerations: 10,
+    elitePolicy: FractionalElitism(0.1),
+  ).run();
+  check(minimum.best.fitness == 0, 'Published minimization failed');
+  final permutation = const PartiallyMappedCrossover<int>().cross(
+      [1,2,3,4], [4,3,2,1], Random(7));
+  check(permutation.toSet().length == 4, 'Published PMX lost genes');
+  print('PASS: hosted binary, native isolate, minimization and permutation operators');
+}

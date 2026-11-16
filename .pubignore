@@ -1,0 +1,8 @@
+.dart_tool/
+.packages
+pubspec.lock
+coverage/
+.metrics/
+.consumer-reports/
+.github/
+tool/
