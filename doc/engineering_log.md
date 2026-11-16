@@ -117,3 +117,8 @@ applied. No credential was extracted, copied into source, or sent to CI.
 - The local shell still cannot resolve pub.dev, so actual hosted consumer
   installation and Flutter validation are assigned to the networked CI runner.
 - No new runtime feature or package release is introduced by this validation work.
+
+- First CI run confirmed hosted Dart installation, native isolate behavior and
+  all 90 benchmark targets. Artifact upload skipped the hidden report directory;
+  explicitly enabled hidden-file upload for that scoped directory and made a
+  missing artifact a failure so raw evidence cannot silently disappear.
