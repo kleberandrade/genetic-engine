@@ -25,9 +25,9 @@ flowchart TD
 | `lib/src/domain/` | Candidate, generation, result, objective, stop reason | Dart SDK and other domain values only |
 | `lib/src/contracts/` | Factory, evaluator, selection, crossover, mutation | SDK and domain only |
 | `lib/src/adapters/` | Function-to-interface adapters and convenience functions | Contracts, domain, built-in operators for convenience facade |
-| `lib/src/operators/selection/` | Tournament selection | Selection contract and domain |
-| `lib/src/operators/crossover/` | Single-point, uniform, order crossover | Crossover contract and parent validation helper |
-| `lib/src/operators/mutation/` | Bit flip, swap, bounded real reset | Mutation contract |
+| `lib/src/operators/selection/` | On-demand selectors, SUS and shared weight validation | Selection/batch contracts and domain |
+| `lib/src/operators/crossover/` | Fixed-list and permutation crossovers | Crossover contract and parent validation helper |
+| `lib/src/operators/mutation/` | Binary, real and sequence mutations | Mutation contract |
 | `lib/src/engine/` | Evolution orchestration and input validation | Contracts, domain, callback adapters |
 | `test/contracts/` | Consumer extension scenarios | Public entry point only |
 | `test/operators/` | Operator invariants and boundaries | Public entry point only |
@@ -45,6 +45,7 @@ Consumers should not import `src/` paths. Internal files may move between releas
 | `GenomeFactory<T>` | `create(Random)` | Produce an immutable genome |
 | `FitnessEvaluator<T>` | `evaluate(T)` | Return finite fitness without mutating the genome |
 | `Selection<T>` | `select(List<Candidate<T>>, Random)` | Treat the nonempty, ranked population as read-only |
+| `BatchSelection<T>` | `selectMany(ranked, count, Random)` | Return exactly count parents without shared state |
 | `Crossover<T>` | `cross(T, T, Random)` | Preserve both parents and representation validity |
 | `Mutation<T>` | `mutate(T, Random)` | Preserve the input and representation validity |
 
@@ -85,5 +86,18 @@ See [integration](integration.md) for runtime boundaries and
 `Termination` evaluates immutable `EvolutionState` observations per generation;
 composite conditions retain no counters. The engine owns the stopwatch and all
 run state. Legacy integer elitism and callback constructors remain supported.
-Selection still receives one ranked population and returns one parent; no batch
-sampling or parallel execution contract is implied.
+
+## Batch selection boundary (0.4)
+
+An engine accepts exactly one of `Selection<T>` or `BatchSelection<T>`. This keeps
+single-parent strategies compatible and avoids concrete operator type checks.
+The engine never imports SUS: it only knows that a batch strategy returns the
+requested number of parents. A length mismatch fails at that contract boundary.
+
+Each generation requests twice the offspring count, shuffles a copied pool, and
+allocates disjoint pairs. The reproduction function consumes a parent supplier,
+so crossover and mutation decisions live in one place for both modes. Batch
+selection, pointer traversal and shared roulette/SUS weight validation belong to
+operators; pair allocation belongs to orchestration. No pool survives a generation.
+See [selection semantics](selection.md) for unused second parents at crossover
+rates below one. Parallel execution remains outside the core.

@@ -5,6 +5,19 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+## 0.4.0 — 2026-11-16
+
+- Add `BatchSelection<T>` and genuine stochastic universal sampling with explicit
+  weights, one random offset, normalized masses and an all-zero uniform fallback.
+- Sample and shuffle one parent pool per generation, keeping elites separate;
+  preserve existing on-demand selection behavior and random-call order.
+- Require exactly one of `selection` and `batchSelection`. The public `selection`
+  field is now nullable; direct field readers must handle batch configurations.
+- Share roulette/SUS weight validation without changing roulette's distribution.
+- Add original eight queens, password and knapsack examples with solution checks.
+- Expand README, architecture, migration, selection and example walkthroughs;
+  reference Baker's SUS publication and GeneticSharp's sample catalogue.
+
 - Add isolated Dart and Flutter consumer checks pinned to hosted version 0.3.1,
   including native compute/widget validation and a release web build.
 - Add a reproducible multi-seed benchmark and source-labeled local baseline.

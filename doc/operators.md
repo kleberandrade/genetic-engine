@@ -17,6 +17,7 @@ mutation may still change its child. It does not itself preserve a survivor.
 | Elite | Always best | Best-first population |
 | Truncation | Uniform among ceil(fraction × n) top candidates | Best-first population |
 | Rank | Descending weights n through 1 | Best-first population |
+| SUS (batch) | Equally spaced pointers with one random offset | Caller supplies the weight transform |
 | Roulette | Proportional to supplied finite, nonnegative weights | Caller supplies the weight transform |
 
 For nonnegative maximization scores use
@@ -25,6 +26,10 @@ minimization cost, one possible transform is `1 / (1 + c.fitness)`. These are
 examples, not universal transforms for arbitrary scores. Rank selection avoids
 fitness scaling altogether. Roulette normalizes by its largest weight to avoid
 sum overflow; all-zero weights fall back to uniform sampling.
+
+SUS implements `BatchSelection`, configured via `batchSelection:` rather than
+`selection:`. See [batch sampling and pairing](selection.md) for its complete
+contract, quotas and differences from roulette.
 
 ## Crossover and mutation
 
@@ -71,7 +76,6 @@ interrupt a fitness call.
 ## Deliberate scope
 
 This release provides a curated operator set, not feature parity with GeneticSharp.
-Stochastic universal sampling needs a batch-parent selection contract and is not
-simulated by repeated single-parent roulette calls. Variable-length chromosomes,
+SUS uses an explicit batch-parent contract. Variable-length chromosomes,
 three-parent crossover, parallel fitness execution, multi-objective optimization
 and island models remain future work. Isolate integration stays application-owned.

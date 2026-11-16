@@ -137,3 +137,33 @@ applied. No credential was extracted, copied into source, or sent to CI.
 - Browser artifact download was interrupted by a lost in-app route; no local
   copy of the CI artifact is claimed. The artifact files remain available in the
   verified GitHub run, alongside the separately committed local baseline.
+
+## 2026-11-16 — SUS and problem walkthroughs (0.4.0 source)
+
+- Added public-API SUS tests first and observed missing batch contract/operator
+  and constructor parameter errors before implementing the feature.
+- Added a separate batch contract to preserve existing single-parent strategy
+  implementations. Constructor validation rejects absent/ambiguous selection.
+- Implemented one-offset, equally spaced SUS sampling; shared normalized weight
+  validation with roulette to keep that boundary in one place.
+- Integrated one shuffled pool per generation and disjoint parent pairs, with
+  exactly two sampled parents per nonelite child. Documented discarded second
+  parents when crossover is skipped and checked custom batch lengths.
+- Documented the nullable selection field as a pre-1.0 source compatibility
+  change and prepared version 0.4.0 without claiming hosted publication.
+- Added original eight queens and password examples inspired by GeneticSharp's
+  README sample catalogue, plus knapsack for finite constraint penalties.
+- Expanded architecture, selection, migration, README and problem walkthroughs;
+  linked Baker's 1987 SUS publication and clarified implementation policies.
+- Validation: 51 tests passed, including integral/fractional quotas, 1,000-offset
+  expected allocation, seed repeatability, zero/invalid/extreme weights, batch
+  integration and known example solutions. Analyzer reported no issues; format
+  and local Markdown-link checks passed. All seven examples executed.
+- Seed-42 outputs: eight queens zero conflicts, password GENETIC, knapsack value
+  40 at weight 10 (also checked against all 64 subsets). These small examples do
+  not establish convergence for other seeds or larger problems.
+- Publication dry-run assembled a 47 KB archive and reached package validation,
+  but the local network check did not finish; cancelled it rather than claiming
+  full dry-run success. The networked CI runner must complete this check.
+- Crapper/dryer/mutator remain unsupported for Dart as recorded above; no empty
+  metric report is treated as evidence.

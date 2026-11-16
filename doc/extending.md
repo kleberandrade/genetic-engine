@@ -46,3 +46,11 @@ Check representation validity, unchanged inputs, boundary values and output
 immutability. For a random operator, test invariants across many seeds rather
 than demanding one incidental random sequence. Run it through the public engine
 against a small problem with a known optimum or deterministic outcome.
+
+## Batch selection
+
+Implement `BatchSelection<T>.selectMany(ranked, count, random)` for algorithms
+that allocate multiple parents together. Supply it via `batchSelection:` and
+omit `selection:`. The engine checks the returned length, copies and shuffles
+the result, and assigns pairs to offspring. Do not implement SUS by making
+independent calls to a single-parent selector. See [selection](selection.md).

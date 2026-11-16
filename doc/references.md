@@ -31,7 +31,16 @@ GENITOR's full steady-state replacement algorithm.
 **[R4] GeneticSharp — giacomelli/GeneticSharp.**
 [Repository and feature catalogue](https://github.com/giacomelli/GeneticSharp).
 Architectural inspiration for pluggable operators and composable terminations.
-Only its README's organization was consulted; no implementation code was copied.
+Its README feature and sample catalogues inspired organization and problem
+families; no implementation code was copied.
+
+**[R5] James Edward Baker (1987). Reducing Bias and Inefficiency in the Selection
+Algorithm.** Proceedings of the Second International Conference on Genetic
+Algorithms, 14–21. [Proceedings scan](https://gpbib.cs.ucl.ac.uk/icga/icga1987-ocr.pdf).
+SUS uses a single random start and equally spaced pointers to allocate a batch.
+This package adds explicit weight validation, equal-mass fallback for all-zero
+weights and an engine-owned shuffle before pairing. These are documented package
+policies, not a claim of reproducing an entire historical GA configuration.
 
 ## Traceability
 
@@ -39,6 +48,8 @@ Only its README's organization was consulted; no implementation code was copied.
 | --- | --- | --- |
 | Roulette and tournament selection | R1 | Explicit roulette weights; zero-weight uniform fallback |
 | Linear rank selection | R1, R3 | Best-first weights n, n−1, …, 1 |
+| SUS | R5 | Batch contract; explicit weights; shuffled parent pairing |
+| Learning examples | R4 sample catalogue | Original Dart eight queens, password, TSP and numerical problems; additional knapsack lesson |
 | PMX and CX | R2 | One offspring; CX alternates cycles deterministically |
 | Insertion, reverse and shuffle | R2 | Immutable lists and validated boundaries |
 | Strategy interfaces, AND/OR stopping | R4 | Dart composition and stateless per-run observations |

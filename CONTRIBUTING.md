@@ -31,6 +31,9 @@ dart run example/genetic_engine_example.dart
 dart run example/minimize.dart
 dart run example/custom_mutation.dart
 dart run example/travelling_salesman.dart
+dart run example/eight_queens.dart
+dart run example/password.dart
+dart run example/knapsack.dart
 dart pub publish --dry-run
 ```
 

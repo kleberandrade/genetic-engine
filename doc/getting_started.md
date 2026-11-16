@@ -74,3 +74,9 @@ Stop priority is target, cancellation, stagnation, then custom termination, then
 cancellation callback cannot interrupt a fitness evaluation. A seeded run is
 repeatable with deterministic callbacks using only the supplied random source
 on the same Dart runtime; cross-runtime random sequences are not promised.
+
+## Continue with complete problems
+
+Use the [example walkthroughs](examples.md) to learn permutation constraints,
+letter domains and finite knapsack penalties. For correlated parent allocation,
+read the [SUS and batch selection guide](selection.md) before choosing weights.
