@@ -1,0 +1,17 @@
+name: genetic_engine_lab
+description: An incremental, seeded genetic algorithm learning laboratory.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.14.0 <4.0.0'
+dependencies:
+  material_ui: ^1.11.1
+  flutter:
+    sdk: flutter
+  genetic_engine:
+    path: ../..
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true

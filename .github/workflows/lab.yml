@@ -1,0 +1,56 @@
+name: Flutter evolution lab
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: evolution-lab-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.50.0'
+          channel: stable
+          cache: true
+      - name: Validate pure Dart core
+        run: |
+          dart pub get
+          dart analyze --fatal-infos
+          dart test
+      - name: Resolve lab dependencies
+        working-directory: example/flutter_lab
+        run: flutter pub get --enforce-lockfile
+      - name: Format, analyze and test lab
+        working-directory: example/flutter_lab
+        run: |
+          dart format --output=none --set-exit-if-changed lib test
+          flutter analyze --fatal-infos
+          flutter test
+      - name: Build GitHub Pages artifact
+        working-directory: example/flutter_lab
+        run: flutter build web --release --base-href /genetic-engine/ --no-web-resources-cdn --no-wasm-dry-run
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: example/flutter_lab/build/web
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy validated lab
+        id: deployment
+        uses: actions/deploy-pages@v4

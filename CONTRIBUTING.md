@@ -86,3 +86,14 @@ those checks. See `doc/validation.md` for exact scope and evidence limitations.
 For selector experiments, run `dart run tool/benchmarks/selection_benchmark.dart
 .consumer-reports source-checkout`. Keep raw seed results and environment metadata;
 report target success and actual evaluation counts alongside timing.
+
+## Flutter evolution lab
+
+The optional application in `example/flutter_lab` uses Flutter 3.50.0 / Dart
+3.14.0 and its committed lockfile. It consumes the checkout rather than hosted
+0.4.0. From that directory run `flutter pub get --enforce-lockfile`,
+`flutter analyze --fatal-infos`, `flutter test`, then
+`flutter build web --release --base-href /genetic-engine/
+--no-web-resources-cdn --no-wasm-dry-run`. The `Flutter evolution lab` workflow
+performs core and application checks before Pages deployment on main. Do not add
+Flutter imports or scheduling policy to the core library.

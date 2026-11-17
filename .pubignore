@@ -6,3 +6,5 @@ coverage/
 .consumer-reports/
 .github/
 tool/
+example/flutter_lab/
+doc/lab/screenshots/

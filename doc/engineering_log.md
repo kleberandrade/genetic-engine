@@ -224,3 +224,7 @@ applied. No credential was extracted, copied into source, or sent to CI.
 - Added Pages validation/deployment workflow and English scenario guide with five
   exercises; retained Portuguese docs and added a short Portuguese lab guide.
 - Detailed browser/build/deployment evidence is maintained in doc/lab/validation.md.
+- Visual QA caught a zero-width history plot (vertical lines). Added a layout
+  assertion and observed width 0 fail; made the chart fill available width and
+  reran widget validation. ExpansionTile also exposed a hidden-ink debug assertion;
+  panels now use Material surfaces so interaction feedback remains visible.

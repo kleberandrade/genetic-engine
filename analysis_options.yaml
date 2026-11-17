@@ -1,3 +1,6 @@
 linter:
   rules:
     curly_braces_in_flow_control_structures: true
+analyzer:
+  exclude:
+    - example/flutter_lab/**

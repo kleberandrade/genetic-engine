@@ -16,6 +16,18 @@ No runtime dependencies, Flutter imports, or connection to a fuzzy engine.
 Published on [pub.dev](https://pub.dev/packages/genetic_engine) by the verified
 publisher [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).
 
+## Interactive evolution lab
+
+[Open the Flutter Web lab](https://kleberandrade.github.io/genetic-engine/) ·
+[Scenario guide](doc/lab/guide.md) · [Validation and real captures](doc/lab/validation.md)
+
+Explore OneMax, eight queens and travelling salesman with best/mean fitness
+history, ranked population, seed replay and compatible genetic operators.
+Run, pause, step, restart or cancel without completing the whole search in one
+UI callback. See [local setup](example/flutter_lab/README.md).
+The lab consumes this checkout's unreleased incremental API; the hosted 0.4.0
+package remains independently validated. Flutter dependencies stay in the example.
+
 ## Installation
 
 ```yaml
