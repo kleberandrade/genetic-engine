@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:genetic_engine/genetic_engine.dart';
 
 import 'lab_model.dart';
+import 'lab_copy.dart';
 
 const _teal = Color(0xFF00695C);
 const _amber = Color(0xFF966400);
@@ -123,7 +124,11 @@ class GenomePainter extends CustomPainter {
 }
 
 class HistoryPainter extends CustomPainter {
-  HistoryPainter(this.history);
+  HistoryPainter(
+    this.history, {
+    this.copy = const LabCopy(LabLanguage.english),
+  });
+  final LabCopy copy;
   final List<Generation<List<int>>> history;
   @override
   void paint(Canvas canvas, Size size) {
@@ -150,7 +155,7 @@ class HistoryPainter extends CustomPainter {
     _text(canvas, '0', Offset(plot.left, plot.bottom + 5), size: 10);
     _text(
       canvas,
-      'Generation ${history.last.index}',
+      '${copy.text(LabText.generation)} ${history.last.index}',
       Offset(max(plot.left, plot.right - 105), plot.bottom + 5),
       size: 10,
     );

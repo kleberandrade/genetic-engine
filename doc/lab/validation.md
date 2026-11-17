@@ -1,5 +1,34 @@
 # Flutter lab validation — 2026-11-17
 
+## English/Portuguese update — 2026-11-17
+
+The lab now has an always-available **Language / Idioma** selector. English remains
+the initial language; choosing Português changes controls, scenario explanations,
+statuses, errors, history labels, population inspection and accessibility copy.
+Material controls and semantic language also follow the selected locale.
+
+- The new switch test was observed failing before the selector existed.
+- All **eight Flutter tests** passed, covering the three original scenarios,
+  lifecycle controls, English/Portuguese paused-run switching without resetting
+  generation, translated scenarios/errors and a Portuguese 390×844 layout with
+  150% text and labeled/Android touch-target guidelines.
+- Flutter analysis passed without issues; the release JavaScript web build passed
+  with the existing Pages base path and local web resources.
+- Chrome inspection confirmed generation 1 and its best/mean values survived
+  English → Português. The document and semantics DOM language became `pt`.
+  Desktop/mobile controls and the translated history axis were visually checked.
+- Root `lib/`, root `test/`, and the lab optimization model have no changes.
+  No dependency or shared SDK changes were required. The choice is session-only.
+- crapper/dryer/mutator still cannot analyze Dart; no new metric is claimed.
+
+![Portuguese desktop interface after changing language at generation one](screenshots/portuguese-desktop.jpg)
+
+![Portuguese selector and controls at 390 pixels wide](screenshots/portuguese-mobile.jpg)
+
+Remote deployment evidence is recorded after the updated workflow completes.
+
+## Initial release validation
+
 ## Scope and environment
 
 Validated source checkout, not a new pub.dev release. The root package version

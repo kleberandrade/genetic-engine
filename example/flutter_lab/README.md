@@ -21,8 +21,18 @@ Read the [scenario and controls guide](../../doc/lab/guide.md) and
 [validation record](../../doc/lab/validation.md). GitHub Actions validates the core,
 lab and release build before Pages deployment. Pull requests only validate.
 
+## Language
+
+Use **Language / Idioma** at the top to select **English** or **Português**.
+Controls, scenario explanations, status/error messages, chart labels and semantic
+summaries switch immediately. Language changes preserve the current population,
+history, configuration, seed and running/paused state. English is the initial
+language on each page load; the choice is kept for the current session only.
+
 ## Português
 
+Selecione **Português** em **Language / Idioma** para traduzir a interface.
+A troca de idioma conserva a execução e os resultados, inclusive durante a pausa.
 Explore OneMax, oito rainhas e caixeiro viajante. **Run** executa; **Pause** pausa;
 **Resume** retoma; **Step** avança uma geração; **Restart** reproduz a seed;
 **Cancel** encerra a execução e conserva os resultados. Para alterar um experimento

@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:genetic_engine/genetic_engine.dart';
 
 import 'lab_model.dart';
+import 'lab_copy.dart';
 import 'plots.dart';
 
 void main() => runApp(const EvolutionLab());
@@ -11,11 +12,20 @@ void main() => runApp(const EvolutionLab());
 const ink = Color(0xFF182C36);
 const teal = Color(0xFF00695C);
 
-class EvolutionLab extends StatelessWidget {
+class EvolutionLab extends StatefulWidget {
   const EvolutionLab({super.key});
   @override
+  State<EvolutionLab> createState() => _EvolutionLabState();
+}
+
+class _EvolutionLabState extends State<EvolutionLab> {
+  LabLanguage language = LabLanguage.english;
+  @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'Genetic Engine · Evolution Lab',
+    locale: Locale(language.code),
+    supportedLocales: const [Locale('en'), Locale('pt')],
+    localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    title: LabCopy(language).text(LabText.title),
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
@@ -26,12 +36,24 @@ class EvolutionLab extends StatelessWidget {
         displayColor: ink,
       ),
     ),
-    home: const LabPage(),
+    home: Semantics(
+      localeForSubtree: Locale(language.code),
+      child: LabPage(
+        language: language,
+        onLanguageChanged: (value) => setState(() => language = value),
+      ),
+    ),
   );
 }
 
 class LabPage extends StatefulWidget {
-  const LabPage({super.key});
+  const LabPage({
+    super.key,
+    this.language = LabLanguage.english,
+    this.onLanguageChanged,
+  });
+  final LabLanguage language;
+  final ValueChanged<LabLanguage>? onLanguageChanged;
   @override
   State<LabPage> createState() => _LabPageState();
 }
@@ -44,13 +66,15 @@ class _LabPageState extends State<LabPage> {
   bool alternative = false;
   double mutation = .3, crossover = .8;
   final seed = TextEditingController(text: '42');
-  String? seedError;
-  String status = 'Ready';
+  bool invalidSeed = false;
+  RunStatus status = RunStatus.ready;
+  LabCopy get copy => LabCopy(widget.language);
+  String t(LabText value) => copy.text(value);
   Timer? timer;
   Iterator<Generation<List<int>>>? iterator;
   final history = <Generation<List<int>>>[];
   bool get running => timer != null;
-  bool get locked => status == 'Running' || status == 'Paused';
+  bool get locked => status == RunStatus.running || status == RunStatus.paused;
   bool get canAdvance => iterator != null;
 
   @override
@@ -62,12 +86,12 @@ class _LabPageState extends State<LabPage> {
   void restart() {
     final parsed = int.tryParse(seed.text);
     if (parsed == null || parsed < 0 || parsed > 2147483647) {
-      setState(() => seedError = 'Enter an integer from 0 to 2147483647.');
+      setState(() => invalidSeed = true);
       return;
     }
     timer?.cancel();
     timer = null;
-    seedError = null;
+    invalidSeed = false;
     activeProblem = problem;
     iterator = LabConfig(
       problem: problem,
@@ -81,7 +105,7 @@ class _LabPageState extends State<LabPage> {
     history.clear();
     iterator!.moveNext();
     history.add(iterator!.current);
-    status = 'Ready';
+    status = RunStatus.ready;
     if (mounted) {
       setState(() {});
     }
@@ -101,8 +125,8 @@ class _LabPageState extends State<LabPage> {
       iterator = null;
       setState(
         () => status = history.last.best.fitness == 0
-            ? 'Target reached'
-            : 'Generation limit',
+            ? RunStatus.targetReached
+            : RunStatus.generationLimit,
       );
     }
   }
@@ -111,9 +135,9 @@ class _LabPageState extends State<LabPage> {
     if (running) {
       timer!.cancel();
       timer = null;
-      setState(() => status = 'Paused');
+      setState(() => status = RunStatus.paused);
     } else if (canAdvance) {
-      setState(() => status = 'Running');
+      setState(() => status = RunStatus.running);
       timer = Timer.periodic(
         const Duration(milliseconds: 70),
         (_) => advance(),
@@ -125,7 +149,7 @@ class _LabPageState extends State<LabPage> {
     timer?.cancel();
     timer = null;
     iterator = null;
-    setState(() => status = 'Cancelled');
+    setState(() => status = RunStatus.cancelled);
   }
 
   @override
@@ -172,9 +196,9 @@ class _LabPageState extends State<LabPage> {
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '01 / EXPERIMENT',
-          style: TextStyle(
+        Text(
+          t(LabText.experiment),
+          style: const TextStyle(
             letterSpacing: 2,
             fontSize: 11,
             fontWeight: FontWeight.bold,
@@ -182,62 +206,62 @@ class _LabPageState extends State<LabPage> {
         ),
         const SizedBox(height: 14),
         dropdown(
-          'Scenario',
+          t(LabText.scenario),
           problem,
           Problem.values,
-          (p) => p.label,
+          (p) => copy.problemName(p),
           (v) => problem = v,
         ),
         const SizedBox(height: 10),
-        Text(problem.description),
+        Text(copy.problemDescription(problem)),
         const SizedBox(height: 14),
         dropdown(
-          'Population',
+          t(LabText.population),
           population,
           [40, 100, 200],
-          (v) => '$v individuals',
+          (v) => '$v ${t(LabText.individuals)}',
           (v) => population = v,
         ),
         const SizedBox(height: 14),
         dropdown(
-          'Parent selection',
+          t(LabText.parentSelection),
           selection,
           ParentSelection.values,
           (v) => switch (v) {
-            ParentSelection.tournament => 'Tournament',
-            ParentSelection.rank => 'Rank',
-            ParentSelection.sus => 'SUS · inverse cost',
+            ParentSelection.tournament => t(LabText.tournament),
+            ParentSelection.rank => t(LabText.rank),
+            ParentSelection.sus => t(LabText.sus),
           },
           (v) => selection = v,
         ),
         const SizedBox(height: 14),
         dropdown(
-          'Operator pair',
+          t(LabText.operators),
           alternative,
           [false, true],
           (v) => problem == Problem.oneMax
-              ? (v ? 'Uniform + bit flip' : 'Single point + bit flip')
-              : (v ? 'Order + reverse' : 'PMX + swap'),
+              ? (v ? t(LabText.uniformBits) : t(LabText.singleBits))
+              : (v ? t(LabText.orderReverse) : t(LabText.pmxSwap)),
           (v) => alternative = v,
         ),
         const SizedBox(height: 14),
-        rate('Crossover probability', crossover, (v) => crossover = v),
-        rate('Mutation probability', mutation, (v) => mutation = v),
+        rate(t(LabText.crossover), crossover, (v) => crossover = v),
+        rate(t(LabText.mutation), mutation, (v) => mutation = v),
         TextField(
           controller: seed,
           enabled: !locked,
           keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            labelText: 'Random seed',
-            errorText: seedError,
-            helperText: 'Applied by Restart. Same seed, same experiment.',
+            labelText: t(LabText.seed),
+            errorText: invalidSeed ? t(LabText.seedError) : null,
+            helperText: t(LabText.seedHelp),
           ),
           onSubmitted: (_) => restart(),
         ),
         const SizedBox(height: 18),
-        const Text(
-          '1 elite survives unchanged. Maximum 300 generations. Lower fitness is better in all three scenarios.',
-          style: TextStyle(fontSize: 12, color: Color(0xFF4C6269)),
+        Text(
+          t(LabText.limits),
+          style: const TextStyle(fontSize: 12, color: Color(0xFF4C6269)),
         ),
       ],
     ),
@@ -252,7 +276,8 @@ class _LabPageState extends State<LabPage> {
             value: value,
             divisions: 10,
             label: '${(value * 100).round()}%',
-            semanticFormatterCallback: (v) => '${(v * 100).round()} percent',
+            semanticFormatterCallback: (v) =>
+                '${(v * 100).round()} ${t(LabText.percent)}',
             onChanged: locked
                 ? null
                 : (v) {
@@ -274,10 +299,10 @@ class _LabPageState extends State<LabPage> {
             children: [
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      '02 / LIVE EVOLUTION',
-                      style: TextStyle(
+                      t(LabText.live),
+                      style: const TextStyle(
                         letterSpacing: 2,
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -287,7 +312,7 @@ class _LabPageState extends State<LabPage> {
                   Semantics(
                     liveRegion: true,
                     child: Text(
-                      status,
+                      copy.status(status),
                       style: const TextStyle(
                         color: teal,
                         fontWeight: FontWeight.bold,
@@ -301,13 +326,13 @@ class _LabPageState extends State<LabPage> {
                 spacing: 30,
                 runSpacing: 12,
                 children: [
-                  metric('Generation', '${generation.index} / 300'),
+                  metric(t(LabText.generation), '${generation.index} / 300'),
                   metric(
-                    'Best fitness',
+                    t(LabText.bestFitness),
                     generation.best.fitness.toStringAsFixed(3),
                   ),
                   metric(
-                    'Mean fitness',
+                    t(LabText.meanFitness),
                     generation.meanFitness.toStringAsFixed(3),
                   ),
                 ],
@@ -322,34 +347,31 @@ class _LabPageState extends State<LabPage> {
                     icon: Icon(running ? Icons.pause : Icons.play_arrow),
                     label: Text(
                       running
-                          ? 'Pause'
-                          : status == 'Paused'
-                          ? 'Resume'
-                          : 'Run',
+                          ? t(LabText.pause)
+                          : status == RunStatus.paused
+                          ? t(LabText.resume)
+                          : t(LabText.run),
                     ),
                   ),
                   OutlinedButton.icon(
                     onPressed: !running && canAdvance ? advance : null,
                     icon: const Icon(Icons.skip_next),
-                    label: const Text('Step'),
+                    label: Text(t(LabText.step)),
                   ),
                   OutlinedButton.icon(
                     onPressed: restart,
                     icon: const Icon(Icons.refresh),
-                    label: const Text('Restart'),
+                    label: Text(t(LabText.restart)),
                   ),
                   TextButton.icon(
                     onPressed: canAdvance ? cancel : null,
                     icon: const Icon(Icons.stop),
-                    label: const Text('Cancel'),
+                    label: Text(t(LabText.cancel)),
                   ),
                 ],
               ),
               const SizedBox(height: 8),
-              const Text(
-                'Pause retains the population. Restart replays the seed. Cancel ends this run.',
-                style: TextStyle(fontSize: 12),
-              ),
+              Text(t(LabText.lifecycle), style: const TextStyle(fontSize: 12)),
             ],
           ),
         ),
@@ -359,7 +381,7 @@ class _LabPageState extends State<LabPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Best individual · ${activeProblem.label}',
+                '${t(LabText.bestIndividual)} · ${copy.problemName(activeProblem)}',
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -373,7 +395,7 @@ class _LabPageState extends State<LabPage> {
                     aspectRatio: 1.65,
                     child: Semantics(
                       label:
-                          '${activeProblem.label} best genome ${generation.best.genome.join(', ')}; fitness ${generation.best.fitness.toStringAsFixed(3)}',
+                          '${copy.problemName(activeProblem)} ${t(LabText.bestGenome)} ${generation.best.genome.join(', ')}; ${t(LabText.fitness)} ${generation.best.fitness.toStringAsFixed(3)}',
                       child: CustomPaint(
                         painter: GenomePainter(
                           activeProblem,
@@ -386,14 +408,11 @@ class _LabPageState extends State<LabPage> {
               ),
               const SizedBox(height: 12),
               SelectableText(
-                'Genome: ${generation.best.genome.join(', ')}',
+                '${t(LabText.genome)}: ${generation.best.genome.join(', ')}',
                 style: const TextStyle(fontSize: 12),
               ),
               if (activeProblem == Problem.salesman)
-                const Text(
-                  'The route closes back to its first city. Distances use normalized coordinates.',
-                  style: TextStyle(fontSize: 12),
-                ),
+                Text(t(LabText.route), style: const TextStyle(fontSize: 12)),
             ],
           ),
         ),
@@ -402,27 +421,32 @@ class _LabPageState extends State<LabPage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Fitness history',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              Text(
+                t(LabText.history),
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-              const Text(
-                'Best (solid teal) / population mean (dashed amber) · lower is better',
-                style: TextStyle(fontSize: 12),
-              ),
+              Text(t(LabText.legend), style: const TextStyle(fontSize: 12)),
               const SizedBox(height: 14),
               SizedBox(
                 height: 170,
                 width: double.infinity,
                 child: Semantics(
-                  label:
-                      'Fitness history across ${history.length} observations. Current best ${generation.best.fitness}, mean ${generation.meanFitness}.',
-                  child: CustomPaint(painter: HistoryPainter(List.of(history))),
+                  label: copy.historySummary(
+                    history.length,
+                    generation.best.fitness,
+                    generation.meanFitness,
+                  ),
+                  child: CustomPaint(
+                    painter: HistoryPainter(List.of(history), copy: copy),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                'Ranked population · ${generation.population.length} individuals',
+                '${t(LabText.ranked)} · ${generation.population.length} ${t(LabText.individuals)}',
                 style: const TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 6),
@@ -432,18 +456,15 @@ class _LabPageState extends State<LabPage> {
                     .map((c) => c.fitness.toStringAsFixed(2))
                     .join('  ·  '),
               ),
-              const Text(
-                'Top eight fitness values shown; all individuals contribute to the mean.',
-                style: TextStyle(fontSize: 12),
-              ),
+              Text(t(LabText.topEight), style: const TextStyle(fontSize: 12)),
               ExpansionTile(
-                title: const Text('Inspect population'),
+                title: Text(t(LabText.inspect)),
                 children: [
                   for (var i = 0; i < generation.population.length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5),
                       child: SelectableText(
-                        '#${i + 1} · fitness ${generation.population[i].fitness.toStringAsFixed(3)} · ${generation.population[i].genome.join(', ')}',
+                        '#${i + 1} · ${t(LabText.fitness)} ${generation.population[i].fitness.toStringAsFixed(3)} · ${generation.population[i].genome.join(', ')}',
                         style: const TextStyle(fontSize: 12),
                       ),
                     ),
@@ -481,9 +502,39 @@ class _LabPageState extends State<LabPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'GENETIC ENGINE / INTERACTIVE LAB',
-                  style: TextStyle(
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: SizedBox(
+                    width: 220,
+                    child: DropdownButtonFormField<LabLanguage>(
+                      key: ValueKey(widget.language),
+                      initialValue: widget.language,
+                      isExpanded: true,
+                      decoration: InputDecoration(
+                        labelText: t(LabText.language),
+                      ),
+                      items: LabLanguage.values
+                          .map(
+                            (language) => DropdownMenuItem(
+                              value: language,
+                              child: Text(language.label),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: widget.onLanguageChanged == null
+                          ? null
+                          : (value) {
+                              if (value != null) {
+                                widget.onLanguageChanged!(value);
+                              }
+                            },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  t(LabText.brand),
+                  style: const TextStyle(
                     color: teal,
                     letterSpacing: 2,
                     fontWeight: FontWeight.bold,
@@ -491,9 +542,9 @@ class _LabPageState extends State<LabPage> {
                   ),
                 ),
                 const SizedBox(height: 14),
-                const Text(
-                  'Small changes.\nBetter generations.',
-                  style: TextStyle(
+                Text(
+                  t(LabText.heading),
+                  style: const TextStyle(
                     fontSize: 40,
                     height: 1.1,
                     fontWeight: FontWeight.w700,
@@ -501,9 +552,9 @@ class _LabPageState extends State<LabPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                const Text(
-                  'Explore selection, crossover and mutation — one generation at a time.',
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  t(LabText.introduction),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 26),
                 LayoutBuilder(
@@ -525,9 +576,12 @@ class _LabPageState extends State<LabPage> {
                         ),
                 ),
                 const SizedBox(height: 24),
-                const Text(
-                  'Pure Dart core · Flutter interface · MIT licensed\nA teaching tool: stochastic search does not guarantee an optimum.',
-                  style: TextStyle(color: Color(0xFF4C6269), fontSize: 12),
+                Text(
+                  t(LabText.footer),
+                  style: const TextStyle(
+                    color: Color(0xFF4C6269),
+                    fontSize: 12,
+                  ),
                 ),
               ],
             ),

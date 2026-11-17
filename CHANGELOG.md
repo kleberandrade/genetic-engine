@@ -5,6 +5,10 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Add an English/Portuguese selector to the Flutter lab, including localized
+  controls, scenarios, errors, statuses, chart labels and accessibility summaries;
+  preserve evolution state across language changes without modifying the core.
+
 - Add lazy `GeneticAlgorithm.generations()` with independent seeded traversal,
   shared lifecycle semantics and cancellation before breeding the next generation.
 - Add a separate Flutter evolution lab for OneMax, eight queens and TSP, with

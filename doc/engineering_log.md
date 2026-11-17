@@ -240,3 +240,20 @@ applied. No credential was extracted, copied into source, or sent to CI.
   Online outdated check confirmed direct lab dependencies current; two transitive
   updates remain incompatible with Flutter's own pins. Added successful run links
   and evidence in a documentation-only follow-up commit.
+
+
+## 2026-11-17 — English/Portuguese lab interface
+
+- Confirmed clean checkout and origin/main before editing. Kept all core library,
+  core tests and lab optimization model unchanged; no dependencies were added.
+- Red: a widget test could not find the missing English language selector.
+  Added typed bilingual application copy and locale-aware Material delegates;
+  presentation state now uses enum statuses and a validation flag, so language
+  does not control execution logic. The existing timer/iterator survives switches.
+- All eight Flutter tests passed, including paused-run language switching,
+  Portuguese scenario/error copy, return to English and 390px / 150% text with
+  labeled/touch-target accessibility checks. The amplified-text test first caught
+  a 25px selector overflow; expanded dropdown content resolved it.
+- Flutter analyzer passed. crapper, dryer (0.8) and mutator scan still have no Dart
+  support; empty reports are not successful quality metrics.
+- Browser/build/deployment results are recorded in doc/lab/validation.md.

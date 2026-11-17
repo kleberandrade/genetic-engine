@@ -7,6 +7,12 @@ captures and validation scope are recorded in [validation](validation.md).
 
 ## Run a reproducible experiment
 
+The **Language / Idioma** selector switches between English and Brazilian
+Portuguese without restarting the search. It also translates chart labels,
+validation errors, screen-reader descriptions and built-in Material controls.
+A paused run remains paused, a running run keeps running, and configuration,
+seed, population and history are retained. Reloading the page starts in English.
+
 Choose a scenario, population (40, 100 or 200), parent selection, operator pair,
 probabilities and seed. Configuration changes restart the experiment. Enter a
 seed from 0 to 2147483647 and press **Restart** to apply it. Defaults use seed 42,
