@@ -25,7 +25,21 @@ persistence. There are no new dependencies or core/model changes.
 
 ![Portuguese restored after explicitly choosing it and reloading](screenshots/language-restored-portuguese.jpg)
 
-Remote deployment evidence follows once the updated workflow completes.
+Published source: `bf032ce91c560554ec874d24c44341668e568da0`.
+
+- [Flutter lab: 14 tests, analysis, release build and Pages deployment passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44172407042).
+- [Core Dart minimum/stable validation passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44172407245).
+- [Hosted Dart/Flutter consumers passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44172406996).
+
+The [public lab](https://kleberandrade.github.io/genetic-engine/) initially selected
+Português after loading the new bundle. Choosing English and reloading restored
+English, overriding the browser-derived Portuguese. Português was selected again
+at the end. A hard refresh was needed to replace an older cached app bundle.
+
+![English preference restored after reloading the public lab](screenshots/language-preference-published.jpg)
+
+The evidence-only follow-up commit uses `[skip ci]`; application code is identical
+to the successful deployment above.
 
 ## English/Portuguese update — 2026-11-17
 

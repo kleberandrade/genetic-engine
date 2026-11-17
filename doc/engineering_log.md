@@ -281,3 +281,7 @@ applied. No credential was extracted, copied into source, or sent to CI.
   existing lifecycle, scenario and large-text accessibility tests. Analyzer passed.
 - crapper, dryer (0.8) and mutator scan remain unsupported for Dart; no metric claim.
 - Browser/build/deployment evidence is recorded in doc/lab/validation.md.
+- Remote checks passed for bf032ce: core minimum/stable, hosted consumers, all 14
+  lab tests, analysis, release build and Pages deployment. Confirmed first-load
+  Portuguese and explicit English surviving reload on the public URL, then left
+  Portuguese selected. Stored a real screenshot and successful workflow links.
