@@ -48,3 +48,19 @@ concurrency so expensive optimization does not exhaust request-serving capacity.
 `maxGenerations`, population size and cancellation checks bound breeding work,
 but cannot interrupt one slow fitness call. If evaluations need remote IO, this
 synchronous evaluator contract is not an asynchronous scheduling API.
+
+
+## Incremental consumers (unreleased source API)
+
+`engine.generations().iterator` uses the same seeded lifecycle as `run()`.
+Each `moveNext()` computes at most one generation, starting with generation zero.
+Retain the iterator to pause; discard it to cancel. A `shouldStop` callback is
+checked after the previous yield and before breeding. Every iterator has its own
+random source and population; completed synchronous `run()` semantics are retained.
+Time-based termination includes paused wall time. The iterator does not expose a
+final stop reason/result; use `run()` when those are required.
+
+Iteration remains synchronous per generation. An external Flutter timer can
+schedule bounded teaching workloads between frames; a worker/isolate is needed
+for expensive evaluators. See the separate [Flutter lab](../example/flutter_lab/)
+and its [runtime limits](lab/guide.md). Hosted 0.4.0 does not contain this API.

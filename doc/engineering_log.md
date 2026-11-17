@@ -204,3 +204,23 @@ applied. No credential was extracted, copied into source, or sent to CI.
   This establishes actual hosted 0.4.0 resolution and SUS execution, independent
   of the source-only fixture check. CI raw benchmark values were not downloaded
   or claimed as inspected; local per-seed results remain separately labeled.
+
+
+## 2026-11-17 — Incremental evolution and Flutter lab
+
+- Inspected clean main checkout, origin, project instructions, public API and
+  steering-engine lab (read-only reference). Shared SDK was left unchanged.
+- Red: public consumer test failed because `generations()` did not exist.
+  Green: extracted the existing loop into one lazy lifecycle shared with `run()`;
+  all 55 core tests passed, including seed replay, lazy evaluation and cancel.
+- Kept Flutter and execution scheduling outside core. Created a private-to-pub
+  example application (publish_to: none), bounded to 200 candidates/300 generations.
+- Added scenario/operator tests and interaction tests for step/pause/resume/cancel/
+  restart, invalid seed and 390px large-text layout with labeled/touchable controls.
+- Used an isolated Flutter 3.50.0/Dart 3.14.0 SDK copy and isolated writable cache.
+  Migrated UI imports to material_ui 1.11.1; SDK-pinned dependencies have no overrides.
+- Ran crapper, dryer threshold 0.8 and mutator scan on Dart source: no supported
+  source files. These are unsupported checks, not successful quality/mutation scores.
+- Added Pages validation/deployment workflow and English scenario guide with five
+  exercises; retained Portuguese docs and added a short Portuguese lab guide.
+- Detailed browser/build/deployment evidence is maintained in doc/lab/validation.md.

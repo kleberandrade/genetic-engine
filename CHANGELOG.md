@@ -5,6 +5,11 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Add lazy `GeneticAlgorithm.generations()` with independent seeded traversal,
+  shared lifecycle semantics and cancellation before breeding the next generation.
+- Add a separate Flutter evolution lab for OneMax, eight queens and TSP, with
+  bounded incremental execution, accessible controls, fitness history and Pages CI.
+
 - Confirm hosted 0.4.0 publication and 160/160 pub.dev points; update installation.
 - Pin independent Dart/Flutter consumers to hosted 0.4.0 and exercise SUS in native
   isolates, Flutter compute, widget rendering and release web compilation.

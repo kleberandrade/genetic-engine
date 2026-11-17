@@ -199,6 +199,27 @@ final class GeneticAlgorithm<T> {
     void Function(Generation<T>)? onGeneration,
     bool Function()? shouldStop,
   }) {
+    late EvolutionResult<T> result;
+    for (final generation in _generations(
+        shouldStop: shouldStop, onFinish: (value) => result = value)) {
+      onGeneration?.call(generation);
+    }
+    return result;
+  }
+
+  /// Lazy, independent evolution using the same lifecycle as [run].
+  /// Each `moveNext` computes at most one generation. Pause by retaining the
+  /// iterator without advancing; cancel by discarding it or using [shouldStop].
+  /// Cancellation is checked after yielding, before breeding. Fitness evaluation
+  /// remains synchronous: consumers must bound work or use a separate worker.
+  /// Time-based termination includes time spent paused between calls.
+  Iterable<Generation<T>> generations({bool Function()? shouldStop}) =>
+      _generations(shouldStop: shouldStop);
+
+  Iterable<Generation<T>> _generations({
+    bool Function()? shouldStop,
+    void Function(EvolutionResult<T>)? onFinish,
+  }) sync* {
     final watch = Stopwatch()..start();
     final random = Random(seed);
     var generation = _rank(
@@ -208,10 +229,13 @@ final class GeneticAlgorithm<T> {
     var best = generation.best;
     var stagnant = 0;
     while (true) {
-      onGeneration?.call(generation);
+      yield generation;
       final reason =
           _stopReason(generation, best, stagnant, watch.elapsed, shouldStop);
-      if (reason != null) return EvolutionResult(best, generation, reason);
+      if (reason != null) {
+        onFinish?.call(EvolutionResult(best, generation, reason));
+        return;
+      }
       generation = _advance(generation, random);
       if (objective.isBetter(generation.best.fitness, best.fitness)) {
         best = generation.best;
