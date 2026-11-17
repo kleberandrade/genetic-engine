@@ -257,3 +257,8 @@ applied. No credential was extracted, copied into source, or sent to CI.
 - Flutter analyzer passed. crapper, dryer (0.8) and mutator scan still have no Dart
   support; empty reports are not successful quality metrics.
 - Browser/build/deployment results are recorded in doc/lab/validation.md.
+- Remote validation for 82d1e13 passed: core minimum/stable, hosted consumers and
+  all eight Flutter tests, analysis, release build and Pages deploy. Confirmed
+  Portuguese in the public lab after refreshing an older cached bundle; switching
+  from English retained generation 1 (best 9.000 / mean 13.580). Saved the published
+  screenshot and linked the successful workflows in the validation record.

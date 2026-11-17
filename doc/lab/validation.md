@@ -25,7 +25,22 @@ Material controls and semantic language also follow the selected locale.
 
 ![Portuguese selector and controls at 390 pixels wide](screenshots/portuguese-mobile.jpg)
 
-Remote deployment evidence is recorded after the updated workflow completes.
+The update was deployed successfully from `82d1e135198c3fcc7ca749fd6636c8014c5674f6`:
+
+- [Flutter lab: eight tests, analysis, release build and Pages deploy passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44170963068).
+- [Dart minimum/stable checks passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44170963263).
+- [Hosted Dart/Flutter consumers passed](https://github.com/kleberandrade/genetic-engine/actions/runs/44170963119).
+
+On the [live lab](https://kleberandrade.github.io/genetic-engine/), Step advanced to
+generation 1 and selecting Português preserved generation 1, best 9.000 and mean
+13.580 while translating controls and descriptions. Chrome initially reused the
+previous cached bundle; a hard refresh loaded the new deployment. If an existing
+browser session still shows the previous interface, use a hard refresh.
+
+![Verified Portuguese selector and controls in the published lab](screenshots/portuguese-published.jpg)
+
+The following evidence-only documentation commit uses `[skip ci]` and does not
+change the application artifact validated above.
 
 ## Initial release validation
 
