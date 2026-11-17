@@ -1,5 +1,32 @@
 # Flutter lab validation — 2026-11-17
 
+## Remembered language update — 2026-11-17
+
+This update supersedes the session-only behavior recorded below. On Web, an
+explicit language choice is stored as `en` or `pt` in the origin-local
+`genetic_engine_lab.language` key. Startup uses a valid saved code first, then
+the first supported browser language in preference order, then English. Regional
+English/Portuguese variants are matched by language. Detection alone does not
+write an explicit preference. Clearing site data removes it; blocked storage
+retains session switching. Native previews detect platform locale without disk
+persistence. There are no new dependencies or core/model changes.
+
+- Red: the pt-BR first-visit widget test failed to find Portuguese before the fix.
+- All **14 Flutter tests** passed, including saved-choice precedence, app recreation,
+  regional/ordered/unsupported/empty browser locales, invalid stored values,
+  failed reads/writes and the existing lifecycle and accessibility checks.
+- Flutter analysis and release JavaScript Web build passed using the same pinned
+  SDK and deployment flags. Dart quality tools remain unsupported.
+- First Chrome load of the new local build selected Português without interaction.
+  Selecting English and reloading restored English; selecting Português and
+  reloading restored Português. The screenshots below were taken after reloads.
+
+![English restored after explicitly choosing it and reloading](screenshots/language-restored-english.jpg)
+
+![Portuguese restored after explicitly choosing it and reloading](screenshots/language-restored-portuguese.jpg)
+
+Remote deployment evidence follows once the updated workflow completes.
+
 ## English/Portuguese update — 2026-11-17
 
 The lab now has an always-available **Language / Idioma** selector. English remains

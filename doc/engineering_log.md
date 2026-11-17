@@ -262,3 +262,22 @@ applied. No credential was extracted, copied into source, or sent to CI.
   Portuguese in the public lab after refreshing an older cached bundle; switching
   from English retained generation 1 (best 9.000 / mean 13.580). Saved the published
   screenshot and linked the successful workflows in the validation record.
+
+
+## 2026-11-17 — Remember language and detect browser preference
+
+- Inspected clean checkout and repository instructions. Core lib/tests and the
+  lab optimization model remain unchanged; no new packages or shared SDK edits.
+- Red: first-visit widget test with pt-BR could not find Portuguese controls.
+- Added a lab-only preference policy: valid saved code, then the first supported
+  browser locale in preference order (regional variants included), then English.
+  Explicit selections synchronously store only en/pt in the namespaced local
+  storage key. Invalid values and denied/quota-failed storage fall back safely.
+- Web JS interop is behind a conditional import; native previews retain platform
+  locale detection and session switching without browser storage. Test callbacks
+  exercise the same policy without relying on browser state.
+- All 14 Flutter tests passed: detection, saved preference priority, app recreation,
+  both choices, invalid/unsupported/empty locale data and blocked storage, plus
+  existing lifecycle, scenario and large-text accessibility tests. Analyzer passed.
+- crapper, dryer (0.8) and mutator scan remain unsupported for Dart; no metric claim.
+- Browser/build/deployment evidence is recorded in doc/lab/validation.md.

@@ -11,7 +11,12 @@ The **Language / Idioma** selector switches between English and Brazilian
 Portuguese without restarting the search. It also translates chart labels,
 validation errors, screen-reader descriptions and built-in Material controls.
 A paused run remains paused, a running run keeps running, and configuration,
-seed, population and history are retained. Reloading the page starts in English.
+seed, population and history are retained. On Web, reloading restores your explicit language choice from this browser's
+local storage. On a first visit (or after clearing site data), the first supported
+browser language is selected; regional Portuguese/English variants are supported.
+Unsupported or empty browser preferences fall back to English. An invalid saved
+value is ignored. Blocked storage does not prevent switching during the session.
+Only the language choice is stored; reload still starts a new experiment.
 
 Choose a scenario, population (40, 100 or 200), parent selection, operator pair,
 probabilities and seed. Configuration changes restart the experiment. Enter a
@@ -76,8 +81,8 @@ Search may stagnate or hit its limit. A good seed does not prove optimality. See
 replay is verified on this toolchain; random sequences are not promised identical
 across SDK/platform versions. Pause excludes further computations, but generic
 core time-based termination includes paused wall time. The lab uses generation
-and fitness limits only. No persistence, network API, telemetry, or pub.dev
-publication is part of this application.
+and fitness limits only. Only the browser-local language choice is persisted; experiment results are not
+saved. No network API, telemetry, or pub.dev publication is part of this application.
 
 ## References and credits
 

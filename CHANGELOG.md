@@ -5,6 +5,10 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Remember the Flutter Web lab's explicit language choice in local storage and
+  detect supported browser languages when no valid saved choice exists; fall
+  back safely when storage is blocked, without modifying the Dart engine.
+
 - Add an English/Portuguese selector to the Flutter lab, including localized
   controls, scenarios, errors, statuses, chart labels and accessibility summaries;
   preserve evolution state across language changes without modifying the core.

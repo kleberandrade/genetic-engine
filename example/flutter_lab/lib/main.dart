@@ -5,6 +5,7 @@ import 'package:genetic_engine/genetic_engine.dart';
 
 import 'lab_model.dart';
 import 'lab_copy.dart';
+import 'language_preference.dart';
 import 'plots.dart';
 
 void main() => runApp(const EvolutionLab());
@@ -13,13 +14,32 @@ const ink = Color(0xFF182C36);
 const teal = Color(0xFF00695C);
 
 class EvolutionLab extends StatefulWidget {
-  const EvolutionLab({super.key});
+  const EvolutionLab({super.key, this.languagePreference});
+  final LanguagePreference? languagePreference;
   @override
   State<EvolutionLab> createState() => _EvolutionLabState();
 }
 
 class _EvolutionLabState extends State<EvolutionLab> {
-  LabLanguage language = LabLanguage.english;
+  late final LanguagePreference preference;
+  late LabLanguage language;
+
+  @override
+  void initState() {
+    super.initState();
+    preference = widget.languagePreference ?? LanguagePreference();
+    language = preference.initialLanguage(
+      WidgetsBinding.instance.platformDispatcher.locales.map(
+        (locale) => locale.toLanguageTag(),
+      ),
+    );
+  }
+
+  void changeLanguage(LabLanguage value) {
+    setState(() => language = value);
+    preference.remember(value);
+  }
+
   @override
   Widget build(BuildContext context) => MaterialApp(
     locale: Locale(language.code),
@@ -38,10 +58,7 @@ class _EvolutionLabState extends State<EvolutionLab> {
     ),
     home: Semantics(
       localeForSubtree: Locale(language.code),
-      child: LabPage(
-        language: language,
-        onLanguageChanged: (value) => setState(() => language = value),
-      ),
+      child: LabPage(language: language, onLanguageChanged: changeLanguage),
     ),
   );
 }
