@@ -4,6 +4,7 @@
 [![API reference](https://img.shields.io/badge/API-reference-blue.svg)](https://pub.dev/documentation/genetic_engine/latest/)
 [![Dart CI](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml)
 [![Published consumers](https://github.com/kleberandrade/genetic-engine/actions/workflows/consumers.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/consumers.yml)
+[![Flutter evolution lab](https://github.com/kleberandrade/genetic-engine/actions/workflows/lab.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/lab.yml)
 [![pub points](https://img.shields.io/pub/points/genetic_engine)](https://pub.dev/packages/genetic_engine/score)
 [![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.3.0-blue?logo=dart)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

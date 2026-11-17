@@ -7,7 +7,8 @@ remains 0.4.0. The lab is `publish_to: none` and uses a local path dependency.
 Flutter 3.50.0 (framework ab2912035e), Dart 3.14.0, material_ui 1.11.1;
 toolchain copied into an isolated temporary directory. No shared Flutter SDK
 was modified. Application dependency versions are pinned in its committed lockfile.
-Two newer cached transitive versions (material_color_utilities/test_api) are
+`flutter pub outdated` confirmed all direct dependencies up to date.
+Two newer transitive versions (material_color_utilities/test_api) are
 incompatible with Flutter's pinned constraints; no overrides were forced.
 
 ## Automated checks
@@ -26,9 +27,9 @@ incompatible with Flutter's pinned constraints; no overrides were forced.
   --no-web-resources-cdn --no-wasm-dry-run`: passed. Assets are served locally,
   including CanvasKit; the Wasm compatibility dry run is deliberately disabled.
   This validates the JavaScript release build, not a Wasm build.
-- `dart pub publish --dry-run`: package validation initially completed with warnings
-  about uncommitted files and the application lockfile ignore rule; the latter
-  was corrected by explicitly allowing the application lockfile. No package was published.
+- `dart pub publish --dry-run`: final clean-checkout validation passed with **0
+  warnings**, after correcting the application lockfile ignore rule. Compressed
+  package size was 65 KB. No package was published.
 - crapper, dryer (0.8) and mutator scan: **unsupported for Dart**; all reported no
   supported source files. No complexity, duplication or mutation score is claimed.
 
@@ -66,10 +67,23 @@ resolving the nested application, root formatting used the core language version
 for Flutter files. Core formatting now targets CLI examples; the lab workflow
 formats its own source after resolving dependencies.
 
-The live deployment result and workflow links are appended after remote checks.
+Final application source: commit `615c62ad169ab40d4e002f78ba627e6c67a30949`.
+
+- [Dart CI: successful on minimum 3.3.0 and stable 3.14.1](https://github.com/kleberandrade/genetic-engine/actions/runs/44169393650).
+- [Hosted Dart/Flutter consumers and benchmarks: successful](https://github.com/kleberandrade/genetic-engine/actions/runs/44169393602).
+- [Flutter lab validation, release build and Pages deploy: successful](https://github.com/kleberandrade/genetic-engine/actions/runs/44169392837).
+- [Live lab](https://kleberandrade.github.io/genetic-engine/) opened successfully
+  in Chrome. **Step** advanced OneMax from generation 0 (best 10, mean 15.920) to
+  generation 1 (best 9, mean 13.580), confirming execution in the published app.
+
+![Published lab after one incremental step](screenshots/published.jpg)
+
+The final evidence-only documentation commit uses `[skip ci]`; no application
+source or deployed artifact differs from the successful run above.
 No paid service, shared SDK change, release tag or pub.dev publication is involved.
 
 Badge transport check: the existing Dart CI and published-consumer GitHub badge
 URLs returned HTTP 200. The shields.io URLs returned HTTP 403 in this environment;
 their rendered values could not be reverified here and were not presented as a
-new verified score. The existing badges were retained.
+new verified score. The existing badges were retained. The new native GitHub lab badge also
+returned HTTP 200 after its successful workflow.

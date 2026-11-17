@@ -233,3 +233,10 @@ applied. No credential was extracted, copied into source, or sent to CI.
   to nested UI files. Scoped core formatting to CLI examples; the lab formats its
   own files after resolving its lockfile. Exempted the application lockfile from
   the root ignore so package dry-run no longer warns about tracked ignored files.
+- Remote checks all passed for 615c62a: Dart minimum/stable, hosted consumers,
+  Flutter lab formatting/analysis/tests/build and Pages deployment. Opened the
+  public lab and verified Step changed generation 0 to 1; saved a real capture.
+- Final clean-checkout package dry-run: 0 warnings, 65 KB; no publication.
+  Online outdated check confirmed direct lab dependencies current; two transitive
+  updates remain incompatible with Flutter's own pins. Added successful run links
+  and evidence in a documentation-only follow-up commit.
