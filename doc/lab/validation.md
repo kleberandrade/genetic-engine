@@ -26,8 +26,9 @@ incompatible with Flutter's pinned constraints; no overrides were forced.
   --no-web-resources-cdn --no-wasm-dry-run`: passed. Assets are served locally,
   including CanvasKit; the Wasm compatibility dry run is deliberately disabled.
   This validates the JavaScript release build, not a Wasm build.
-- `dart pub publish --dry-run`: package validation completed with one warning
-  about uncommitted source files at the time of the check. No package was published.
+- `dart pub publish --dry-run`: package validation initially completed with warnings
+  about uncommitted files and the application lockfile ignore rule; the latter
+  was corrected by explicitly allowing the application lockfile. No package was published.
 - crapper, dryer (0.8) and mutator scan: **unsupported for Dart**; all reported no
   supported source files. No complexity, duplication or mutation score is claimed.
 
@@ -59,6 +60,11 @@ GitHub Pages was absent before this work. Repository Pages configuration now use
 GitHub Actions, with eleven verified relevant topics and an updated About description
 and homepage. The workflow tests the pure Dart core and Flutter lab, then builds
 with `/genetic-engine/` before deployment. Pull requests cannot deploy.
+
+The first remote core format check exposed a package-boundary issue: without
+resolving the nested application, root formatting used the core language version
+for Flutter files. Core formatting now targets CLI examples; the lab workflow
+formats its own source after resolving dependencies.
 
 The live deployment result and workflow links are appended after remote checks.
 No paid service, shared SDK change, release tag or pub.dev publication is involved.

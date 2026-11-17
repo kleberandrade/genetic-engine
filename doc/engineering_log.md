@@ -228,3 +228,8 @@ applied. No credential was extracted, copied into source, or sent to CI.
   assertion and observed width 0 fail; made the chart fill available width and
   reran widget validation. ExpansionTile also exposed a hidden-ink debug assertion;
   panels now use Material surfaces so interaction feedback remains visible.
+- First remote CI exposed cross-package formatting: root Dart formatting ran
+  before resolving the Flutter application, so it applied the root language style
+  to nested UI files. Scoped core formatting to CLI examples; the lab formats its
+  own files after resolving its lockfile. Exempted the application lockfile from
+  the root ignore so package dry-run no longer warns about tracked ignored files.

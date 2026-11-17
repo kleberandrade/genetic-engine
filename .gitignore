@@ -4,3 +4,6 @@ pubspec.lock
 coverage/
 .metrics/
 .consumer-reports/
+
+# Application lockfile; the pure Dart package lockfile remains ignored.
+!example/flutter_lab/pubspec.lock

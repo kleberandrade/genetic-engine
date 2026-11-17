@@ -23,6 +23,7 @@ jobs:
       - name: Validate pure Dart core
         run: |
           dart pub get
+          dart format --output=none --set-exit-if-changed lib test example/*.dart tool
           dart analyze --fatal-infos
           dart test
       - name: Resolve lab dependencies
