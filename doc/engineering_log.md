@@ -328,3 +328,9 @@ applied. No credential was extracted, copied into source, or sent to CI.
   in desktop and 390px layouts; Documentation opened the real source in a new tab.
 - Initial navbar/Learn commit 727b32b passed all three remote workflows and Pages;
   the small flag follow-up is independently validated before its next deployment.
+- Final source b96aece passed lab validation/19 tests/build/Pages, core minimum/
+  stable CI and hosted consumers. Verified the live desktop/mobile app, flags,
+  Learn and an actual 200-candidate TSP preset. Navigation/language retained the
+  existing OneMax observation; preset loading deliberately reset it. Page/JS/
+  favicon/CanvasKit assets returned 200; SVG parsed successfully. About/README
+  retain the actual URL and eleven topics. Added real production captures.

@@ -24,7 +24,26 @@ keyboard focus/Enter. Switching preserves the experiment and saved preference.
 
 ![Circular flags in the compact mobile navbar](screenshots/circular-flags-mobile.jpg)
 
-Final circular-flag deployment evidence follows after its workflow completes.
+Published application SHA: `b96aecedb18d6d3449951d5dfcff3fca5fbb8152`.
+
+- [Final lab analysis, 19 tests, release build and Pages deployment: successful](https://github.com/kleberandrade/genetic-engine/actions/runs/44179702301).
+- [Dart minimum/stable checks: successful](https://github.com/kleberandrade/genetic-engine/actions/runs/44179702279).
+- [Hosted Dart/Flutter consumer validation: successful](https://github.com/kleberandrade/genetic-engine/actions/runs/44179702357).
+- [Verified live app](https://kleberandrade.github.io/genetic-engine/): desktop and
+  390px navbar/flags/Learn were inspected. OneMax generation 1, best 9.000 and mean
+  13.580 survived Learn navigation and a switch to English. The mobile TSP preset
+  opened generation zero with population 200, Rank, Order/reverse, mutation 40%,
+  best 3.091 and mean 4.739; changing back to Português retained those values.
+- Page, main.dart.js, flutter_bootstrap.js, SVG favicon and CanvasKit WASM all
+  returned HTTP 200 with appropriate content types; the published favicon parsed
+  as SVG XML. README and About link to the actual app; eleven topics are retained.
+
+![Published integrated lessons with original logo and circular language flags](screenshots/published-learning-flags.jpg)
+
+![Published mobile TSP preset after changing to Portuguese](screenshots/published-mobile-preset.jpg)
+
+The final evidence-only documentation commit uses `[skip ci]` and does not change
+the deployed application artifact. No pub.dev release or other service was used.
 
 ## Branded navbar and integrated Learn — 2026-11-17
 
