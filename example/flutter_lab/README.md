@@ -21,6 +21,27 @@ Read the [scenario and controls guide](../../doc/lab/guide.md) and
 [validation record](../../doc/lab/validation.md). GitHub Actions validates the core,
 lab and release build before Pages deployment. Pull requests only validate.
 
+## Navigation and learning
+
+The fixed navbar offers **Laboratory**, **Learn**, **Examples**, **Documentation**
+and **GitHub**, with a compact menu on small screens or enlarged text. The language
+selector remains available in every section. Navigation preserves the experiment;
+a running search continues, and a paused search remains paused. Each section keeps
+its own scroll position. **Load in laboratory** deliberately starts a new run with
+the displayed preset (including seed, population, operators and probabilities).
+
+Learn is fully integrated, in English and Brazilian Portuguese, using the actual
+project guides. It explains representation, objective direction, mean/best fitness,
+OneMax, diagonal conflicts, closed tours, tournament/rank/SUS selection, independent
+operators, elitism and runtime limits. Source references precede exactly five
+exercises, each with an objective and completion criterion. Other CLI examples are
+linked as documentation; they are not advertised as additional browser scenarios.
+
+The logo is original vector artwork: two crossing genomes and a gold mutation
+node. Flutter paints the compact mark; the web favicon and repository wordmark
+are SVG assets under `web/` and `doc/lab/brand/`. All are covered by the repository
+MIT license, with no external logo assets or cross-engine dependency.
+
 ## Language
 
 Use **Language / Idioma** at the top to select **English** or **Português**.
@@ -36,6 +57,11 @@ the current session. Native preview builds use the platform locale without disk
 persistence; browser persistence is the validated target.
 
 ## Português
+
+A navbar inclui **Laboratório**, **Aprender**, **Exemplos**, **Documentação** e
+**GitHub**; no celular, use o menu. Aprender contém explicações completas, fórmulas
+e cinco exercícios. Os três exemplos carregam configurações reais no laboratório.
+Navegar preserva a execução; carregar um exemplo inicia um novo experimento.
 
 Selecione **Português** em **Language / Idioma** para traduzir a interface.
 A troca de idioma conserva a execução e os resultados, inclusive durante a pausa.

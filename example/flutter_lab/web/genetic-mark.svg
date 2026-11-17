@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+<title id="title">Genetic Engine</title><desc id="desc">Original mark: crossing genomes with a gold mutation node.</desc>
+<rect width="64" height="64" rx="16" fill="#00695c"/>
+<g fill="none" stroke-width="4" stroke-linecap="round"><path d="M18 14C46 26 18 38 46 50M46 14C18 26 46 38 18 50" stroke="#fff"/><path d="M18 14H46M27 26H37M27 38H37M18 50H46" stroke="#caeae0"/></g><circle cx="46" cy="50" r="5" fill="#f3c766"/>
+</svg>

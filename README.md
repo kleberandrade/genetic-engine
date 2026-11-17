@@ -1,5 +1,7 @@
 # genetic_engine
 
+![Original Genetic Engine wordmark](doc/lab/brand/wordmark.svg)
+
 [![pub package](https://img.shields.io/pub/v/genetic_engine.svg)](https://pub.dev/packages/genetic_engine)
 [![API reference](https://img.shields.io/badge/API-reference-blue.svg)](https://pub.dev/documentation/genetic_engine/latest/)
 [![Dart CI](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/kleberandrade/genetic-engine/actions/workflows/ci.yml)
@@ -21,6 +23,12 @@ publisher [kleberandrade.dev](https://pub.dev/publishers/kleberandrade.dev).
 
 [Open the Flutter Web lab](https://kleberandrade.github.io/genetic-engine/) ·
 [Scenario guide](doc/lab/guide.md) · [Validation and real captures](doc/lab/validation.md)
+
+Use the responsive navbar to switch between **Laboratory**, **Learn** and
+**Examples**, or open the project documentation/GitHub. Learn includes bilingual
+fundamentals, formulas, compatible operators, source references and five practical
+exercises; three runnable presets open a fresh configured experiment. The
+original crossing-genome mark also appears as the web favicon.
 
 Explore OneMax, eight queens and travelling salesman with best/mean fitness
 history, ranked population, seed replay and compatible genetic operators.

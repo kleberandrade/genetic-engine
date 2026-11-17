@@ -5,6 +5,23 @@
 This original conceptual illustration is not an application screenshot. Real
 captures and validation scope are recorded in [validation](validation.md).
 
+## Navigate and learn
+
+The fixed, responsive navbar keeps project identity, language and navigation
+available while scrolling. **Laboratory** retains the current experiment;
+**Learn** presents the real repository algorithms, formulas and five exercises;
+**Examples** offers three executable presets. Ordinary navigation preserves
+configuration, seed, population, history and running/paused status. Loading a
+preset resets the experiment intentionally. Source documentation and GitHub open
+in a separate browser tab. The compact menu supports keyboard navigation.
+
+Learn is written in both English and Brazilian Portuguese. Its references are the
+actual getting-started, selection, operators, examples, integration and research
+guides. English source documents are identified as such; no embedded GitHub page
+substitutes for teaching content. The source-only incremental API and published
+core 0.4.0 are distinguished explicitly, and future capabilities remain marked
+unimplemented.
+
 ## Run a reproducible experiment
 
 The **Language / Idioma** selector switches between English and Brazilian

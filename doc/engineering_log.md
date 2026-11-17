@@ -285,3 +285,31 @@ applied. No credential was extracted, copied into source, or sent to CI.
   lab tests, analysis, release build and Pages deployment. Confirmed first-load
   Portuguese and explicit English surviving reload on the public URL, then left
   Portuguese selected. Stored a real screenshot and successful workflow links.
+
+
+## 2026-11-17 — Branded navbar and integrated learning
+
+- Inspected clean checkout, project workflow, and the actual getting-started,
+  selection, operators, examples and integration docs. Core/model remain unchanged.
+- Red: navigation test failed because Learn was absent. Added independent navbar,
+  vector branding, bilingual lessons/resources and executable preset models.
+  No cross-engine files or shared SDK were modified and no dependencies added.
+- Navbar has Laboratory/Learn/Examples plus real Documentation/GitHub destinations;
+  a compact menu handles small screens and enlarged text. Language preference
+  remains available everywhere. Ordinary navigation preserves paused/run state;
+  loading a named preset deliberately resets to generation zero.
+- Created original crossing-genome/gold-node geometry as Flutter paint and SVG
+  compact mark, wordmark and favicon. XML validation passed for all vector assets.
+- Teaching content mirrors implemented semantics: minimization-form OneMax, queen
+  diagonal pairs, closed Euclidean TSP, tournament/rank/SUS, independent mutation,
+  elitism and bounded cooperative execution. References precede five objective /
+  completion exercises; future capabilities are explicitly absent.
+- Added tests for paused navigation plus language switching, all preset loads,
+  mobile keyboard menu, accessibility and real resource destinations. Visual QA
+  exposed formulas missing from their own accessibility node; added a failing
+  assertion, explicit semantic labels and a separate formula node.
+- Eight actual documentation/repository URLs returned HTTP 200. Local Chrome
+  desktop/mobile UI, translations, presets and figures were inspected. Detailed
+  final checks and deployment evidence are recorded in doc/lab/validation.md.
+- crapper, dryer threshold 0.8 and mutator remain unsupported for Dart; no metric
+  is inferred from empty reports.

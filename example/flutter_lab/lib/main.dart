@@ -7,6 +7,12 @@ import 'lab_model.dart';
 import 'lab_copy.dart';
 import 'language_preference.dart';
 import 'plots.dart';
+import 'lab_navigation.dart';
+import 'learning_page.dart';
+import 'learning_content.dart';
+import 'link_launcher_stub.dart'
+    if (dart.library.js_interop) 'link_launcher_web.dart'
+    as links;
 
 void main() => runApp(const EvolutionLab());
 
@@ -14,7 +20,8 @@ const ink = Color(0xFF182C36);
 const teal = Color(0xFF00695C);
 
 class EvolutionLab extends StatefulWidget {
-  const EvolutionLab({super.key, this.languagePreference});
+  const EvolutionLab({super.key, this.languagePreference, this.onOpenResource});
+  final ValueChanged<LabResource>? onOpenResource;
   final LanguagePreference? languagePreference;
   @override
   State<EvolutionLab> createState() => _EvolutionLabState();
@@ -58,7 +65,11 @@ class _EvolutionLabState extends State<EvolutionLab> {
     ),
     home: Semantics(
       localeForSubtree: Locale(language.code),
-      child: LabPage(language: language, onLanguageChanged: changeLanguage),
+      child: LabPage(
+        language: language,
+        onLanguageChanged: changeLanguage,
+        onOpenResource: widget.onOpenResource,
+      ),
     ),
   );
 }
@@ -68,14 +79,56 @@ class LabPage extends StatefulWidget {
     super.key,
     this.language = LabLanguage.english,
     this.onLanguageChanged,
+    this.onOpenResource,
   });
   final LabLanguage language;
   final ValueChanged<LabLanguage>? onLanguageChanged;
+  final ValueChanged<LabResource>? onOpenResource;
   @override
   State<LabPage> createState() => _LabPageState();
 }
 
 class _LabPageState extends State<LabPage> {
+  LabSection section = LabSection.laboratory;
+  LabPreset? loadedPreset;
+  String n(NavText value) => value.inLanguage(copy);
+
+  void openResource(LabResource resource) {
+    if (widget.onOpenResource != null) {
+      widget.onOpenResource!(resource);
+      return;
+    }
+    if (!links.launchResource(resource.url)) {
+      showDialog<void>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(n(NavText.address)),
+          content: SelectableText(resource.url),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(n(NavText.close)),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void loadPreset(LabPreset preset) {
+    final config = preset.config;
+    problem = config.problem;
+    population = config.population;
+    selection = config.selection;
+    alternative = config.alternative;
+    crossover = config.crossoverRate;
+    mutation = config.mutationRate;
+    seed.text = '${config.seed}';
+    section = LabSection.laboratory;
+    loadedPreset = preset;
+    restart();
+  }
+
   Problem problem = Problem.oneMax;
   Problem activeProblem = Problem.oneMax;
   ParentSelection selection = ParentSelection.tournament;
@@ -508,102 +561,103 @@ class _LabPageState extends State<LabPage> {
     ],
   );
 
+  Widget laboratory() => SingleChildScrollView(
+    key: const PageStorageKey('laboratory'),
+    padding: const EdgeInsets.all(24),
+    child: Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1200),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              t(LabText.brand),
+              style: const TextStyle(
+                color: teal,
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              t(LabText.heading),
+              style: const TextStyle(
+                fontSize: 40,
+                height: 1.1,
+                fontWeight: FontWeight.w700,
+                letterSpacing: -1,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(t(LabText.introduction), style: const TextStyle(fontSize: 16)),
+            const SizedBox(height: 12),
+            if (loadedPreset != null)
+              Text(
+                '${n(NavText.loaded)}: ${loadedPreset!.title.inLanguage(copy)}',
+              ),
+            const SizedBox(height: 26),
+            LayoutBuilder(
+              builder: (context, constraints) => constraints.maxWidth < 820
+                  ? Column(
+                      children: [
+                        controls(),
+                        const SizedBox(height: 16),
+                        results(),
+                      ],
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(width: 320, child: controls()),
+                        const SizedBox(width: 20),
+                        Expanded(child: results()),
+                      ],
+                    ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              t(LabText.footer),
+              style: const TextStyle(color: Color(0xFF4C6269), fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 1200),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SizedBox(
-                    width: 220,
-                    child: DropdownButtonFormField<LabLanguage>(
-                      key: ValueKey(widget.language),
-                      initialValue: widget.language,
-                      isExpanded: true,
-                      decoration: InputDecoration(
-                        labelText: t(LabText.language),
+      child: Column(
+        children: [
+          LabNavbar(
+            copy: copy,
+            section: section,
+            onNavigate: (value) => setState(() => section = value),
+            onResource: openResource,
+            onLanguageChanged: widget.onLanguageChanged,
+          ),
+          Expanded(
+            child: section == LabSection.laboratory
+                ? laboratory()
+                : SingleChildScrollView(
+                    key: PageStorageKey(section),
+                    padding: const EdgeInsets.all(24),
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1000),
+                        child: LearningPage(
+                          copy: copy,
+                          examplesOnly: section == LabSection.examples,
+                          onPreset: loadPreset,
+                          onResource: openResource,
+                        ),
                       ),
-                      items: LabLanguage.values
-                          .map(
-                            (language) => DropdownMenuItem(
-                              value: language,
-                              child: Text(language.label),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: widget.onLanguageChanged == null
-                          ? null
-                          : (value) {
-                              if (value != null) {
-                                widget.onLanguageChanged!(value);
-                              }
-                            },
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  t(LabText.brand),
-                  style: const TextStyle(
-                    color: teal,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  t(LabText.heading),
-                  style: const TextStyle(
-                    fontSize: 40,
-                    height: 1.1,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -1,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  t(LabText.introduction),
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 26),
-                LayoutBuilder(
-                  builder: (context, constraints) => constraints.maxWidth < 820
-                      ? Column(
-                          children: [
-                            controls(),
-                            const SizedBox(height: 16),
-                            results(),
-                          ],
-                        )
-                      : Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(width: 320, child: controls()),
-                            const SizedBox(width: 20),
-                            Expanded(child: results()),
-                          ],
-                        ),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  t(LabText.footer),
-                  style: const TextStyle(
-                    color: Color(0xFF4C6269),
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
           ),
-        ),
+        ],
       ),
     ),
   );

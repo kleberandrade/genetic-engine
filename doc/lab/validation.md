@@ -1,5 +1,44 @@
 # Flutter lab validation — 2026-11-17
 
+## Branded navbar and integrated Learn — 2026-11-17
+
+The lab now includes responsive Laboratory/Learn/Examples navigation, a persistent
+language selector, original vector branding and actual project documentation / GitHub
+links. The core library, core tests and optimization model remain unchanged.
+
+- Red: the first navigation test failed because Learn was missing.
+- **18 Flutter tests passed**, including paused navigation and language switching,
+  all three real preset loads, mobile keyboard selection with 150% text, labeled
+  and Android touch-target guidelines, and reference destinations. A separate
+  formula accessibility assertion failed before explicit semantic nodes were added;
+  it now passes and browser AX inspection exposes each formula as readable text.
+- Flutter analysis passed without issues; JavaScript release Web build passed with
+  the existing `/genetic-engine/` base path, local web resources and no Wasm dry run.
+- Compact mark, wordmark and SVG favicon are original crossing-genome artwork with
+  a gold mutation node. All SVGs passed XML parsing; no borrowed logo assets.
+- Eight repository / document URLs returned HTTP 200. The lesson uses real
+  getting-started, selection, operators, examples, integration and research sources.
+  It distinguishes published core 0.4.0 from the checkout's incremental API.
+- Learn contains complete English/pt-BR explanations, interpreted formulas, source
+  references and exactly five practical objective/completion exercises. Examples
+  offers three real configurations; loading one intentionally resets the run.
+- Chrome desktop and 390px UI were inspected in both languages, including the
+  compact menu and loading the queen/SUS preset. Keyboard menu behavior is verified
+  by Flutter interaction tests; browser automation did not independently confirm
+  physical-key handling. No broader assistive-technology audit is claimed.
+- Changed-file secret-pattern scan found no matches; diff whitespace checks passed.
+  crapper/dryer/mutator remain unsupported for Dart and produce no usable metrics.
+
+![Integrated learning with the desktop navbar in Portuguese](screenshots/learn-desktop-pt.jpg)
+
+![Complete English teaching content and original mark](screenshots/learn-desktop-en.jpg)
+
+![Compact navbar and Portuguese learning content at 390px](screenshots/learn-mobile-pt.jpg)
+
+![Real runnable examples in the mobile layout](screenshots/examples-mobile.jpg)
+
+Deployment evidence follows after the validated workflow completes.
+
 ## Remembered language update — 2026-11-17
 
 This update supersedes the session-only behavior recorded below. On Web, an

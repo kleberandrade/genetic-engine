@@ -5,6 +5,11 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Add a responsive, bilingual Flutter lab navbar, original vector logo/favicon,
+  integrated Learn lessons with interpreted formulas and five exercises, and
+  three executable presets. Preserve experiments while navigating; link actual
+  repository documentation and keep the pure Dart engine unchanged.
+
 - Remember the Flutter Web lab's explicit language choice in local storage and
   detect supported browser languages when no valid saved choice exists; fall
   back safely when storage is blocked, without modifying the Dart engine.
