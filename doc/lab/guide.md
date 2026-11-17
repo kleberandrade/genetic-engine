@@ -24,8 +24,9 @@ unimplemented.
 
 ## Run a reproducible experiment
 
-The **Language / Idioma** selector switches between English and Brazilian
-Portuguese without restarting the search. It also translates chart labels,
+The circular UK/Brazil language buttons switch between English and Brazilian
+Portuguese without restarting the search. Tooltips and accessible labels identify the
+languages; a ring and check indicate selection. They also translate chart labels,
 validation errors, screen-reader descriptions and built-in Material controls.
 A paused run remains paused, a running run keeps running, and configuration,
 seed, population and history are retained. On Web, reloading restores your explicit language choice from this browser's

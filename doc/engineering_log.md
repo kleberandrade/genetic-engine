@@ -313,3 +313,18 @@ applied. No credential was extracted, copied into source, or sent to CI.
   final checks and deployment evidence are recorded in doc/lab/validation.md.
 - crapper, dryer threshold 0.8 and mutator remain unsupported for Dart; no metric
   is inferred from empty reports.
+
+- Follow-up user request replaces the dropdown with circular Brazil/UK flags.
+  Added local vector paint (no emoji/downloaded assets), selected ring/check,
+  language-name tooltips, explicit semantics and 48×48 InkWell keyboard targets.
+  Updated locale/persistence/navigation tests to activate the actual flag controls;
+  the new flag test checks tooltip, selection semantics, focus/Enter and touch size.
+  Existing material_ui Tooltip differs from Flutter's legacy tooltip test finder;
+  stable keys and typed tooltip/semantics checks target the actual controls.
+  Local heavy checks run sequentially; other chats' processes remain untouched.
+- All 19 flag/navigation/locale tests passed in a serial local run. Updated a
+  deprecated test-only semantics query to flagsCollection; its focused test passed
+  again. Analyzer and release build passed. Visually verified the circular flags
+  in desktop and 390px layouts; Documentation opened the real source in a new tab.
+- Initial navbar/Learn commit 727b32b passed all three remote workflows and Pages;
+  the small flag follow-up is independently validated before its next deployment.

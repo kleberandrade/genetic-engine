@@ -18,9 +18,7 @@ void main() {
           .map((t) => t.data)
           .whereType<String>()
           .singleWhere((text) => RegExp(r'^\d+ / 300$').hasMatch(text));
-      await tester.tap(find.text('English'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Português').last);
+      await tester.tap(find.byKey(const ValueKey('language-pt')));
       await tester.pumpAndSettle();
       expect(find.text('Pausado'), findsOneWidget);
       expect(find.text('Retomar'), findsOneWidget);
@@ -37,9 +35,7 @@ void main() {
       await tester.tap(find.text('Cancelar'));
       await tester.pump();
       expect(find.text('Cancelado'), findsOneWidget);
-      await tester.tap(find.text('Português'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('English').last);
+      await tester.tap(find.byKey(const ValueKey('language-en')));
       await tester.pumpAndSettle();
       expect(find.text('Cancelled'), findsOneWidget);
       expect(find.text(generation), findsOneWidget);
@@ -51,9 +47,7 @@ void main() {
       await tester.binding.setSurfaceSize(const Size(1280, 1200));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       await tester.pumpWidget(const EvolutionLab());
-      await tester.tap(find.text('English'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Português').last);
+      await tester.tap(find.byKey(const ValueKey('language-pt')));
       await tester.pumpAndSettle();
       await tester.tap(find.text('OneMax'));
       await tester.pumpAndSettle();
@@ -82,9 +76,7 @@ void main() {
       await tester.tap(find.text('Reiniciar'));
       await tester.pumpAndSettle();
       expect(find.text('Digite um inteiro de 0 a 2147483647.'), findsOneWidget);
-      await tester.tap(find.text('Português'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('English').last);
+      await tester.tap(find.byKey(const ValueKey('language-en')));
       await tester.pumpAndSettle();
       expect(
         find.text('Enter an integer from 0 to 2147483647.'),
@@ -107,9 +99,7 @@ void main() {
     final semantics = tester.ensureSemantics();
     try {
       await tester.pumpWidget(const EvolutionLab());
-      await tester.tap(find.text('English'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Português').last);
+      await tester.tap(find.byKey(const ValueKey('language-pt')));
       await tester.pumpAndSettle();
       expect(tester.takeException(), isNull);
       await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));

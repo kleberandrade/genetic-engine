@@ -1,5 +1,31 @@
 # Flutter lab validation — 2026-11-17
 
+## Circular language controls — 2026-11-17
+
+The final navbar uses locally painted circular Brazil / UK flags. These are vector
+flag renditions in repository-owned MIT code, not emoji or downloaded assets.
+Names remain available as tooltips and semantic button labels; selected state is
+announced and shown with an outline plus check. Each target is 48×48 and supports
+keyboard focus/Enter. Switching preserves the experiment and saved preference.
+
+- All 19 local Flutter tests passed in one sequential run. After replacing a
+  deprecated semantics assertion with the current flagsCollection API, the focused
+  flag test passed again; the other 18 behaviors did not change. Analysis passed
+  with no issues and the release Web build passed. Core/model remain unchanged.
+- The flag test covers explicit names, tooltip, selection semantics, target size,
+  keyboard activation and accessibility guidelines. Navigation/locale tests now
+  activate the actual flag controls and continue testing persistence and presets.
+- Chrome inspection confirmed recognizable circular flags at desktop/390px sizes,
+  selected outlines/checks, translated Learn content and real documentation opening
+  in a separate tab. Existing 18-test navbar deployment is successful; this is its
+  small requested follow-up, with final CI/deployment evidence recorded below.
+
+![Circular language flags and the integrated Portuguese learning area](screenshots/circular-flags-desktop.jpg)
+
+![Circular flags in the compact mobile navbar](screenshots/circular-flags-mobile.jpg)
+
+Final circular-flag deployment evidence follows after its workflow completes.
+
 ## Branded navbar and integrated Learn — 2026-11-17
 
 The lab now includes responsive Laboratory/Learn/Examples navigation, a persistent
@@ -37,7 +63,11 @@ links. The core library, core tests and optimization model remain unchanged.
 
 ![Real runnable examples in the mobile layout](screenshots/examples-mobile.jpg)
 
-Deployment evidence follows after the validated workflow completes.
+The initial navbar/Learn source `727b32ba11ff82ec4dce8ef565bed4d0ab05d3b2`
+passed [lab validation and Pages deployment](https://github.com/kleberandrade/genetic-engine/actions/runs/44177801508),
+[Dart minimum/stable CI](https://github.com/kleberandrade/genetic-engine/actions/runs/44177801349)
+and [hosted consumers](https://github.com/kleberandrade/genetic-engine/actions/runs/44177801144).
+The circular flag follow-up at the top supersedes its dropdown language control.
 
 ## Remembered language update — 2026-11-17
 

@@ -12,7 +12,12 @@ void main() {
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     await tester.pumpWidget(const EvolutionLab());
     await tester.pumpAndSettle();
-    expect(find.text('Português'), findsOneWidget);
+    expect(
+      Localizations.localeOf(
+        tester.element(find.byKey(const ValueKey('language-pt'))),
+      ).languageCode,
+      'pt',
+    );
     expect(find.text('Cenário'), findsOneWidget);
     expect(find.text('0 / 300'), findsOneWidget);
   });
@@ -71,26 +76,32 @@ void main() {
         stored,
         isNull,
       ); // Detection does not create an explicit preference.
-      await tester.tap(find.text('English'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Português').last);
+      await tester.tap(find.byKey(const ValueKey('language-pt')));
       await tester.pumpAndSettle();
       expect(stored, 'pt');
       await tester.pumpWidget(const SizedBox.shrink());
       await tester.pumpWidget(EvolutionLab(languagePreference: preference()));
       await tester.pumpAndSettle();
-      expect(find.text('Português'), findsOneWidget);
+      expect(
+        Localizations.localeOf(
+          tester.element(find.byKey(const ValueKey('language-pt'))),
+        ).languageCode,
+        'pt',
+      );
       expect(find.text('Cenário'), findsOneWidget);
-      await tester.tap(find.text('Português'));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('English').last);
+      await tester.tap(find.byKey(const ValueKey('language-en')));
       await tester.pumpAndSettle();
       expect(stored, 'en');
       await tester.pumpWidget(const SizedBox.shrink());
       tester.platformDispatcher.localesTestValue = [const Locale('pt', 'BR')];
       await tester.pumpWidget(EvolutionLab(languagePreference: preference()));
       await tester.pumpAndSettle();
-      expect(find.text('English'), findsOneWidget);
+      expect(
+        Localizations.localeOf(
+          tester.element(find.byKey(const ValueKey('language-en'))),
+        ).languageCode,
+        'en',
+      );
       expect(find.text('Scenario'), findsOneWidget);
     },
   );
@@ -109,9 +120,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('English'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Português').last);
+    await tester.tap(find.byKey(const ValueKey('language-pt')));
     await tester.pumpAndSettle();
     expect(find.text('Cenário'), findsOneWidget);
     await tester.tap(find.text('Avançar'));

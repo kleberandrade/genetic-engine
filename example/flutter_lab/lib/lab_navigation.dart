@@ -1,6 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 
 import 'branding.dart';
+import 'language_buttons.dart';
 import 'lab_copy.dart';
 import 'learning_content.dart';
 
@@ -22,30 +23,8 @@ class LabNavbar extends StatelessWidget {
   final ValueChanged<LabLanguage>? onLanguageChanged;
   String n(NavText text) => text.inLanguage(copy);
 
-  Widget language() => SizedBox(
-    width: 148,
-    child: DropdownButtonFormField<LabLanguage>(
-      key: ValueKey(copy.language),
-      initialValue: copy.language,
-      isExpanded: true,
-      decoration: InputDecoration(
-        labelText: copy.text(LabText.language),
-        isDense: true,
-      ),
-      items: LabLanguage.values
-          .map(
-            (value) => DropdownMenuItem(value: value, child: Text(value.label)),
-          )
-          .toList(),
-      onChanged: onLanguageChanged == null
-          ? null
-          : (value) {
-              if (value != null) {
-                onLanguageChanged!(value);
-              }
-            },
-    ),
-  );
+  Widget language() =>
+      LanguageButtons(language: copy.language, onChanged: onLanguageChanged);
 
   Widget navigationButton(LabSection value) => Semantics(
     selected: value == section,

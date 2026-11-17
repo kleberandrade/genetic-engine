@@ -44,7 +44,11 @@ MIT license, with no external logo assets or cross-engine dependency.
 
 ## Language
 
-Use **Language / Idioma** at the top to select **English** or **Português**.
+Use the circular **Brazil** / **United Kingdom** flags in the navbar to choose
+**Português (Brasil)** or **English (United Kingdom)**. Hover or long-press reveals
+the language name. A ring and check mark identify the selected language; screen
+readers also receive its selected state. Each control has a 48×48 touch target
+and keyboard focus. Flags are drawn locally in Flutter, not downloaded or emoji.
 Controls, scenario explanations, status/error messages, chart labels and semantic
 summaries switch immediately. Language changes preserve the current population,
 history, configuration, seed and running/paused state. English is the
@@ -63,7 +67,9 @@ A navbar inclui **Laboratório**, **Aprender**, **Exemplos**, **Documentação**
 e cinco exercícios. Os três exemplos carregam configurações reais no laboratório.
 Navegar preserva a execução; carregar um exemplo inicia um novo experimento.
 
-Selecione **Português** em **Language / Idioma** para traduzir a interface.
+Use a bandeira circular do Brasil para português ou a do Reino Unido para inglês.
+O nome aparece no tooltip e no leitor de tela; contorno e marca de seleção indicam
+o idioma ativo, com suporte a foco por teclado e área de toque de 48 × 48 px.
 A troca de idioma conserva a execução e os resultados, inclusive durante a pausa.
 O navegador lembra a escolha; na primeira visita, o idioma segue as preferências
 do navegador, com inglês como fallback.

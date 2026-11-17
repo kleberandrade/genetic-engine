@@ -5,6 +5,10 @@ separate: the versions below describe source revisions, not pub.dev availability
 
 ## Unreleased
 
+- Replace the language dropdown with locally drawn circular Brazil/UK flags,
+  accessible language names and selected-state rings/checks, keyboard focus and
+  48×48 touch targets; preserve saved preferences and the current experiment.
+
 - Add a responsive, bilingual Flutter lab navbar, original vector logo/favicon,
   integrated Learn lessons with interpreted formulas and five exercises, and
   three executable presets. Preserve experiments while navigating; link actual

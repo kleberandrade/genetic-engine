@@ -27,9 +27,7 @@ void main() {
     await tester.tap(find.text('Learn'));
     await tester.pumpAndSettle();
     expect(find.text('Selection is not survival'), findsOneWidget);
-    await tester.tap(find.text('English'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.text('Português').last);
+    await tester.tap(find.byKey(const ValueKey('language-pt')));
     await tester.pumpAndSettle();
     expect(find.text('Seleção não é sobrevivência'), findsOneWidget);
     await tester.tap(find.text('Laboratório'));
@@ -92,9 +90,7 @@ void main() {
         expect(tester.takeException(), isNull);
         await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
-        await tester.tap(find.text('English'));
-        await tester.pumpAndSettle();
-        await tester.tap(find.text('Português').last);
+        await tester.tap(find.byKey(const ValueKey('language-pt')));
         await tester.pumpAndSettle();
         expect(find.text('Entenda a busca'), findsOneWidget);
         await tester.tap(find.byKey(const Key('navigation-menu')));
